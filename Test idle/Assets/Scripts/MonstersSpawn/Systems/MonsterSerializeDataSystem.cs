@@ -17,13 +17,27 @@ namespace DefaultNamespace.MonstersSpawn.Systems
 
         public void Run()
         {
-            var canSerialize = ReturnSerializeData();
+            var monsterState = ReturnSerializeData();
             var monsterSpawn = ReturnSpawnComponent();
             
             var monsterWorld = _ecsWorld.NewEntity();
-            monsterWorld.Get<MonsterBattleComponents>();
+            monsterWorld.Get<MonsterBattleComponents>().monstersAbstract = monsterSpawn._spawnMonster.GetMonsterData();
+            monsterWorld.Get<MonsterCooldownAttackComponent>();
 
+            if (monsterState.SerializeMonsterSettings)
+            {
+                foreach (var monsterIndex in _monsterDataFilter)
+                {
+                    ref var monster = ref _monsterDataFilter.Get1(monsterIndex);
+                    ref var monsterAttackCooldown = ref _monsterDataFilter.Get2(monsterIndex);
 
+                    monster.currentHP = monster.monstersAbstract.hitPoint;
+                    monsterAttackCooldown.blockTimer = monster.monstersAbstract.attackSpeed;
+
+                    monsterState.SerializeMonsterSettings = false;
+                }
+            }
+            
         }
 
         private SpawnSettings ReturnSpawnComponent()
@@ -40,9 +54,9 @@ namespace DefaultNamespace.MonstersSpawn.Systems
                 throw;
             }
         }
-        private bool ReturnSerializeData()
+        private CheckStateMonster ReturnSerializeData()
         {
-            var stateMonster = _stateFilter.GetEntitiesCount() > 0 ? _stateFilter.Get1(0).SerializeMonsterSettings : default;
+            var stateMonster = _stateFilter.GetEntitiesCount() > 0 ? _stateFilter.Get1(0) : default;
 
             try
             {
@@ -51,7 +65,7 @@ namespace DefaultNamespace.MonstersSpawn.Systems
             catch (Exception e)
             {
                 Debug.LogError($"Serialize state monster failed {e}");
-                return false;
+                throw;
             }
         }
     }

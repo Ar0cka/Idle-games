@@ -2484,7 +2484,7 @@ MonoBehaviour:
   value:
     _prefabsMonsters:
     - {fileID: 1868321867802512536, guid: e6a4d2f5a8d6d5a4085d933bc24080c6, type: 3}
-    - {fileID: 1868321867802512536, guid: 87b67be8bf20f6c48824b3b95cfe1d1f, type: 3}
+    - {fileID: 1868321867802512536, guid: e6a4d2f5a8d6d5a4085d933bc24080c6, type: 3}
 --- !u!114 &1949234100
 MonoBehaviour:
   m_ObjectHideFlags: 0

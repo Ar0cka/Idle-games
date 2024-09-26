@@ -1,4 +1,5 @@
-﻿using DefaultNamespace.Battle.Components.MonsterComponents;
+﻿using DefaultNamespace.Battle.Components.Events.AttackEvents;
+using DefaultNamespace.Battle.Components.MonsterComponents;
 using UnityEngine;
 
 namespace DefaultNamespace.Battle.Components.Events.BlockAttackEvents.SpawnMonsters.MonoBehavior
@@ -23,6 +24,10 @@ namespace DefaultNamespace.Battle.Components.Events.BlockAttackEvents.SpawnMonst
             return _spawnObject;
         }
 
-       
+        public MonstersAbstract GetMonsterData()
+        {
+            var monsterData = _spawnObject.GetComponent<MonsterData>();
+            return monsterData._monsterSettings;
+        }
     }
 }

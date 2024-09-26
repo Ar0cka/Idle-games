@@ -19,7 +19,7 @@ namespace DefaultNamespace.Battle.System.BattleSystems.MonstersAttackSystem
                 ref var monster = ref _attackSpeedEnemy.Get2(attackIndex);
                 ref var monsterEntity = ref _attackSpeedEnemy.GetEntity(attackIndex);
 
-                attackSpeedEnemy = monster.monstersAbstract._attackSpeed;
+                attackSpeedEnemy = monster.monstersAbstract.attackSpeed;
                 monsterEntity.Del<SerializeAttackCooldownEvent>();
             }
         }
