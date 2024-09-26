@@ -40,8 +40,7 @@ namespace DefaultNamespace.Battle.System.BattleSystems.MonstersAttackSystem
                     foreach (var stateIndex in _monsterStateFilter)
                     {
                         ref var monsterState = ref _monsterStateFilter.Get1(stateIndex);
-
-                        entity.Destroy();
+                        
                         MonsterDeadActions();
                         
                         monsterState.isMonsterAlive = false;

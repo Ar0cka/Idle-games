@@ -27,7 +27,6 @@ namespace DefaultNamespace.BattlePhase.Systems.BattleSystems.SpawnSystems.Respaw
                 if (monsterEntity != default)
                 {
                     monsterEntity.Get<ChoiceMonsterEvent>();
-                    Debug.Log("Monster choice event");
                 }
                 
                 spawnEntity.Del<RespawnEvent>();

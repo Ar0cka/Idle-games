@@ -33,8 +33,6 @@ namespace DefaultNamespace.BattlePhase.Systems.BattleSystems.SpawnSystems
                     entityMonster.Get<LoadingMonsterEvent>()._prefab = _listWithMonsters[randomNumber];
                 
                 entity.Del<ChoiceMonsterEvent>();
-                
-                Debug.Log($"Monster take end");
             }
         }
     }

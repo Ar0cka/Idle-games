@@ -44,7 +44,6 @@ namespace DefaultNamespace.BattlePhase.Systems.BattleSystems.SpawnSystems
                     }
                     
                     entity.Del<SpawnMonsterEvent>();
-                    Debug.Log($"End spawn");
                 }
             }
         }

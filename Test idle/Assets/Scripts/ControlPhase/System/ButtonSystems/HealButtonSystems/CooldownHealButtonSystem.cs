@@ -20,7 +20,6 @@ namespace DefaultNamespace.Battle.System
                 ref var entityButton = ref _buttonFilter.GetEntity(buttonIndex);
 
                 cooldownButton -= Time.deltaTime;
-                Debug.Log($"Cooldown = {cooldownButton}");
 
                 if (cooldownButton <= 0)
                 {

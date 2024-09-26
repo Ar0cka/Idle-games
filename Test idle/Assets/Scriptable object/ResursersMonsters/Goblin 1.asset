@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 28937bff087148a2aae83dcc47609a23, type: 3}
-  m_Name: Goblin
+  m_Name: Goblin 1
   m_EditorClassIdentifier: 
   nameMonster: Goblin
-  hitPoint: 5
+  hitPoint: 7
   damage: 1
   attackSpeed: 4

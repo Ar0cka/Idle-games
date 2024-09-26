@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using DefaultNamespace.Battle.Components.MonsterComponents;
+using UnityEngine;
 
 namespace DefaultNamespace.Battle.Components.Events.BlockAttackEvents.SpawnMonsters.MonoBehavior
 {
@@ -21,5 +22,7 @@ namespace DefaultNamespace.Battle.Components.Events.BlockAttackEvents.SpawnMonst
         {
             return _spawnObject;
         }
+
+       
     }
 }

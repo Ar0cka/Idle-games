@@ -10,6 +10,7 @@ using DefaultNamespace.BattlePhase.Components.Events.SpawnEvents;
 using DefaultNamespace.BattlePhase.Systems.BattleSystems.SpawnSystems;
 using DefaultNamespace.BattlePhase.Systems.BattleSystems.SpawnSystems.RespawnSystems;
 using DefaultNamespace.ControlPhase.Components.Events;
+using DefaultNamespace.MonstersSpawn.Systems;
 using DefaultNamespace.Player.System;
 using Leopotam.Ecs;
 using UnityEngine;
@@ -61,14 +62,14 @@ namespace DefaultNamespace
             
             // Системы, связанные с битвой
             systems.Add(new PlayerAttackEnemySystem());
+            systems.Add(new MonsterSerializeDataSystem());
             systems.Add(new EnemyAttackSystem());
             systems.Add(new EnemyTakeDamageSystem());
             
             // Системы, связанные со спавном монстра
-            systems.Add(new MonsterSerializeSystem());
+        
             systems.Add(new RespawnSystem());
             systems.Add(new TakeMonsterSystem());
-            systems.Add(new OnHpBarEnemySystem());
             systems.Add(new LoadingMonsterSystem());
             systems.Add(new SpawnMonsterSystem());
             
@@ -76,6 +77,7 @@ namespace DefaultNamespace
             systems.Add(new PlayerTakeDamageSystem());
             systems.Add(new PlayerBlockAttackSystem());
             systems.Add(new EnemyBlockSystem());
+            systems.Add(new OnHpBarEnemySystem());
             systems.Add(new MonsterUpdateHpBarSystem());
             systems.Add(new PlayerUpdateHpBarSystem());
             

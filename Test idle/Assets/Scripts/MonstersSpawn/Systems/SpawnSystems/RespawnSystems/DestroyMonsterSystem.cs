@@ -1,5 +1,6 @@
 ﻿using DefaultNamespace.Battle.Components.BattleComponents;
 using DefaultNamespace.Battle.Components.Events.BlockAttackEvents.SpawnMonsters;
+using DefaultNamespace.Battle.Components.MonsterComponents;
 using DefaultNamespace.BattlePhase.Components.Events.SpawnEvents;
 using DefaultNamespace.ControlPhase.Components.Events;
 using Leopotam.Ecs;
@@ -11,6 +12,7 @@ namespace DefaultNamespace.BattlePhase.Systems.BattleSystems.SpawnSystems
     public class DestroyMonsterSystem : IEcsRunSystem
     {
         private readonly EcsFilter<SpawnSettings, DestroyMonsterEvent> _spawnEcsFilter = null;
+        private readonly EcsFilter<MonsterBattleComponents> _monster = null;
         private readonly EcsFilter<CheckStateMonster> _monsterStateFilter = null;
         private readonly EcsFilter<HpBarComponent> _hpBarFilter = null;
 
@@ -29,10 +31,21 @@ namespace DefaultNamespace.BattlePhase.Systems.BattleSystems.SpawnSystems
                     ref var stateEntity = ref _monsterStateFilter.GetEntity(stateIndex);
                     
                     stateMonster = false;
+                    DeleteMonsterEntity();
                     stateEntity.Get<HideHpBarEnemyEvent>();
                 }
                 
                 entity.Del<DestroyMonsterEvent>();
+            }
+        }
+
+        private void DeleteMonsterEntity()
+        {
+            var monsterEntity = _monster.GetEntitiesCount() > 0 ? _monster.GetEntity(0) : default;
+
+            if (monsterEntity != default)
+            {
+                monsterEntity.Destroy();
             }
         }
     }
