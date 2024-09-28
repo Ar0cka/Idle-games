@@ -23,19 +23,16 @@ namespace MonsterSpawn.Systems
             foreach (var monsterListIndex in _monsterForSpawnFilter)
             {
                 ref var monsterList = ref _monsterListFilter.Get1(monsterListIndex);
+                ref var spawnEntity = ref _monsterListFilter.GetEntity(monsterListIndex);
                 var randomCount = Random.Range(0, monsterList._monstersFromFirstFloor.Count);
 
                 foreach (var monsterIndex in _monsterForSpawnFilter)
                 {
                     ref var monster = ref _monsterForSpawnFilter.Get1(monsterIndex);
                     monster.monsterObject = monsterList._monstersFromFirstFloor[randomCount];
+                    spawnEntity.Get<SpawnEvent>();
                 }
             }
-        }
-
-        private void SendSpawnEvent()
-        {
-            
         }
     }
 }
