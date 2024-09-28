@@ -1,8 +1,6 @@
 ﻿using DefaultNamespace.Battle.Components.BattleComponents;
 using DefaultNamespace.Battle.Components.Events;
 using DefaultNamespace.Battle.Components.Events.BlockAttackEvents;
-using DefaultNamespace.Battle.Components.Events.BlockAttackEvents.SpawnMonsters;
-using DefaultNamespace.BattlePhase.Components.Events.SpawnEvents;
 using DefaultNamespace.ControlPhase.Components.Events;
 using Leopotam.Ecs;
 using UnityEngine;
@@ -12,7 +10,6 @@ namespace DefaultNamespace.Battle.System
     public class BeginBattleSystem : IEcsInitSystem
     {
         private EcsFilter<ButtonBattleComponent, isBattlePhaseComponent>.Exclude<SerializeAttackCooldownEvent> _battleFilter = null;
-        private EcsFilter<MonsterFromFirstFloorComponent> _monsterListFilter = null;
         private EcsFilter<MonsterCooldownAttackComponent> _monster = null;
         private EcsFilter<PlayerCooldownComponent> _playerAttackCooldownSystem;
         
@@ -47,12 +44,6 @@ namespace DefaultNamespace.Battle.System
         private void SendEvents()
         {
             // Spawn enemy
-            var monsterEntity = _monsterListFilter.GetEntitiesCount() > 0
-                ? _monsterListFilter.GetEntity(0)
-                : default;
-
-            if (monsterEntity != default)
-                monsterEntity.Get<ChoiceMonsterEvent>();
 
             var playerEntity = _playerAttackCooldownSystem.GetEntitiesCount() > 0
                 ? _playerAttackCooldownSystem.GetEntity(0)

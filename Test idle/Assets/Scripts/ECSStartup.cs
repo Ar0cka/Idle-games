@@ -6,11 +6,7 @@ using DefaultNamespace.Battle.Components.Events.BlockAttackEvents;
 using DefaultNamespace.Battle.System;
 using DefaultNamespace.Battle.System.BattleSystem.BlockSystems;
 using DefaultNamespace.Battle.System.BattleSystems.MonstersAttackSystem;
-using DefaultNamespace.BattlePhase.Components.Events.SpawnEvents;
-using DefaultNamespace.BattlePhase.Systems.BattleSystems.SpawnSystems;
-using DefaultNamespace.BattlePhase.Systems.BattleSystems.SpawnSystems.RespawnSystems;
 using DefaultNamespace.ControlPhase.Components.Events;
-using DefaultNamespace.MonstersSpawn.Systems;
 using DefaultNamespace.Player.System;
 using Leopotam.Ecs;
 using UnityEngine;
@@ -52,7 +48,6 @@ namespace DefaultNamespace
         private void AddBattlePhaseSystems()
         {  
             systems.Add(new PlayerInitSystem());
-            systems.Add(new SerializeCheckStateMonster());
     
             // Фазы битвы и интерфейс управления
             systems.Add(new BeginBattleSystem());
@@ -66,27 +61,17 @@ namespace DefaultNamespace
             systems.Add(new EnemyTakeDamageSystem());
             
             // Системы, связанные со спавном монстра
-        
-            systems.Add(new RespawnSystem());
-            systems.Add(new TakeMonsterSystem());
-            systems.Add(new LoadingMonsterSystem());
-            systems.Add(new SpawnMonsterSystem());
-            systems.Add(new BlockSpawnSystem());
-            systems.Add(new MonsterSerializeDataSystem());
             
             // Системы которые относятся к battle phase
             systems.Add(new PlayerTakeDamageSystem());
             systems.Add(new PlayerBlockAttackSystem());
             systems.Add(new EnemyBlockSystem());
-            systems.Add(new OnHpBarEnemySystem());
             systems.Add(new MonsterUpdateHpBarSystem());
             systems.Add(new PlayerUpdateHpBarSystem());
             
             // Управление концом битвы
             systems.Add(new RunFromBattleSystem());
             systems.Add(new EndFightControlSystem());
-            systems.Add(new DestroyMonsterSystem());
-            systems.Add(new HideHpBarEnemySystem());
 
             systems.Add(new HealHeroButtonSystem());
             systems.Add(new HideHealButtonSystem());
@@ -112,12 +97,6 @@ namespace DefaultNamespace
             systems.OneFrame<OnHpBarEnemyEvent>();
             
             //Ивенты связанные со спавном и уничтожением монстра
-            systems.OneFrame<ChoiceMonsterEvent>();
-            systems.OneFrame<LoadingMonsterEvent>();
-            systems.OneFrame<SpawnMonsterEvent>();
-            systems.OneFrame<LoadDataMonsterEvent>();
-            systems.OneFrame<DestroyMonsterEvent>();
-            systems.OneFrame<RespawnEvent>();
         }
         #endregion
        
