@@ -62,7 +62,6 @@ namespace DefaultNamespace
             
             // Системы, связанные с битвой
             systems.Add(new PlayerAttackEnemySystem());
-            systems.Add(new MonsterSerializeDataSystem());
             systems.Add(new EnemyAttackSystem());
             systems.Add(new EnemyTakeDamageSystem());
             
@@ -72,6 +71,8 @@ namespace DefaultNamespace
             systems.Add(new TakeMonsterSystem());
             systems.Add(new LoadingMonsterSystem());
             systems.Add(new SpawnMonsterSystem());
+            systems.Add(new BlockSpawnSystem());
+            systems.Add(new MonsterSerializeDataSystem());
             
             // Системы которые относятся к battle phase
             systems.Add(new PlayerTakeDamageSystem());

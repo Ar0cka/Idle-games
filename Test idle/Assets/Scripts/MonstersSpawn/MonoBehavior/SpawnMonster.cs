@@ -27,6 +27,7 @@ namespace DefaultNamespace.Battle.Components.Events.BlockAttackEvents.SpawnMonst
         public MonstersAbstract GetMonsterData()
         {
             var monsterData = _spawnObject.GetComponent<MonsterData>();
+            
             return monsterData._monsterSettings;
         }
     }

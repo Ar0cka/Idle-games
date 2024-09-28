@@ -32,6 +32,8 @@ namespace DefaultNamespace.BattlePhase.Systems.BattleSystems.SpawnSystems
                 if (entityMonster != default)
                     entityMonster.Get<LoadingMonsterEvent>()._prefab = _listWithMonsters[randomNumber];
                 
+                Debug.Log($"Take monster");
+                
                 entity.Del<ChoiceMonsterEvent>();
             }
         }

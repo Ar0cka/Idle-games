@@ -10,5 +10,6 @@ namespace DefaultNamespace.Battle.Components.Events.BlockAttackEvents.SpawnMonst
         public Transform _spawPosition;
         public GameObject _parent;
         public SpawnMonster _spawnMonster;
+        public float blockSpawnTimer;
     }
 }
