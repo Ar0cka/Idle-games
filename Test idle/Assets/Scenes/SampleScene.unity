@@ -2438,8 +2438,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1949234098}
   - component: {fileID: 1949234101}
-  - component: {fileID: 1949234100}
-  - component: {fileID: 1949234099}
+  - component: {fileID: 1949234104}
+  - component: {fileID: 1949234103}
   - component: {fileID: 1949234102}
   m_Layer: 5
   m_Name: Spawner
@@ -2469,38 +2469,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1949234099
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1949234097}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff23a28aaff446e597469e372a0ae754, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  value:
-    _prefabsMonsters:
-    - {fileID: 1868321867802512536, guid: e6a4d2f5a8d6d5a4085d933bc24080c6, type: 3}
-    - {fileID: 1868321867802512536, guid: e6a4d2f5a8d6d5a4085d933bc24080c6, type: 3}
---- !u!114 &1949234100
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1949234097}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb7a7d992e724a04a78ea43c08c9ee18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  value:
-    _spawPosition: {fileID: 1315269100}
-    _parent: {fileID: 1068925366}
-    _spawnMonster: {fileID: 1949234102}
 --- !u!114 &1949234101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2523,9 +2491,40 @@ MonoBehaviour:
   m_GameObject: {fileID: 1949234097}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15421927e8664ce9a9a25126dd97f65d, type: 3}
+  m_Script: {fileID: 11500000, guid: c2dea6532ecf4ec0bed9ec597fcbaa76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1949234103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1949234097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da3d3cd4c52f48a1ad086159c3d4cc2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  value:
+    monsterPosition: {fileID: 1315269100}
+    monsterSpawnScript: {fileID: 1949234102}
+    spawnTimer: 0
+--- !u!114 &1949234104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1949234097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cbfd9b1782e469494d3a2329f718ea7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  value:
+    _monstersFromFirstFloor:
+    - {fileID: 1868321867802512536, guid: e6a4d2f5a8d6d5a4085d933bc24080c6, type: 3}
 --- !u!1 &2022029451
 GameObject:
   m_ObjectHideFlags: 0

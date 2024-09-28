@@ -10,11 +10,7 @@ namespace DefaultNamespace.Battle.System
     public class BeginBattleSystem : IEcsInitSystem
     {
         private EcsFilter<ButtonBattleComponent, isBattlePhaseComponent>.Exclude<SerializeAttackCooldownEvent> _battleFilter = null;
-        private EcsFilter<MonsterCooldownAttackComponent> _monster = null;
         private EcsFilter<PlayerCooldownComponent> _playerAttackCooldownSystem;
-        
-        
-        private bool isRunCanWork;
 
         public void Init()
         {
@@ -31,7 +27,6 @@ namespace DefaultNamespace.Battle.System
             {
                 ref var isBattlePhase = ref _battleFilter.Get2(i).IsBeginBattlePhase;
                 isBattlePhase = true;
-                isRunCanWork = true;
 
                 ref var entity = ref _battleFilter.GetEntity(i);
                 entity.Get<HideBeginBattleUIEvent>();
