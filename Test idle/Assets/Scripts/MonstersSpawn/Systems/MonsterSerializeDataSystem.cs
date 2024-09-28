@@ -1,8 +1,11 @@
 ﻿using System;
+using DefaultNamespace.Battle.Components.BattleComponents;
+using DefaultNamespace.Battle.Components.Events;
 using DefaultNamespace.Battle.Components.Events.BlockAttackEvents;
 using DefaultNamespace.Battle.Components.Events.BlockAttackEvents.SpawnMonsters;
 using DefaultNamespace.Battle.Components.Events.BlockAttackEvents.SpawnMonsters.MonoBehavior;
 using DefaultNamespace.Battle.Components.MonsterComponents;
+using DefaultNamespace.ControlPhase.Components.Events;
 using Leopotam.Ecs;
 using UnityEngine;
 
@@ -10,48 +13,55 @@ namespace DefaultNamespace.MonstersSpawn.Systems
 {
     public class MonsterSerializeDataSystem : IEcsRunSystem
     {
-        private EcsWorld _ecsWorld;
-        private readonly EcsFilter<MonsterBattleComponents, MonsterCooldownAttackComponent> _monsterDataFilter = null;
-        private readonly EcsFilter<CheckStateMonster> _stateFilter = null;
-        private readonly EcsFilter<SpawnSettings> _spawnFilter = null;
+        private EcsFilter<CheckStateMonster> _monsterState;
+        
+        private EcsFilter<MonsterBattleComponents, MonsterCooldownAttackComponent> _monster = null;
 
+        private EcsFilter<HpBarComponent> _hpBarComponent = null;
+        
         public void Run()
         {
-            var canSerialize = ReturnSerializeData();
-            var monsterSpawn = ReturnSpawnComponent();
-            
-            var monsterWorld = _ecsWorld.NewEntity();
-            monsterWorld.Get<MonsterBattleComponents>();
-
-
-        }
-
-        private SpawnSettings ReturnSpawnComponent()
-        {
-            var monsterSpawn = _spawnFilter.GetEntitiesCount() > 0 ? _spawnFilter.Get1(0) : default;
-
-            try
+            foreach (var boolIndex in _monsterState)
             {
-                return monsterSpawn;
-            }
-            catch (Exception e)
-            {
-                Debug.LogError($"failed monster spawn serialize {e}");
-                throw;
+                ref var serializeMonsterState = ref _monsterState.Get1(boolIndex);
+
+                if (serializeMonsterState.SerializeMonsterSettings)
+                {
+                    Debug.Log($"Serialize bool = true");
+                }
+              
+                if (!serializeMonsterState.SerializeMonsterSettings) continue;
+                
+                MonsterSerializeMethod();
+
+                OnHpBarEnemy();
+                
+                serializeMonsterState.SerializeMonsterSettings = false;
             }
         }
-        private bool ReturnSerializeData()
-        {
-            var stateMonster = _stateFilter.GetEntitiesCount() > 0 ? _stateFilter.Get1(0).SerializeMonsterSettings : default;
 
-            try
+        private void OnHpBarEnemy()
+        {
+            var barEntity = _hpBarComponent.GetEntitiesCount() > 0 ? _hpBarComponent.GetEntity(0) : default;
+
+            if (barEntity != default)
+                barEntity.Get<OnHpBarEnemyEvent>();
+        }
+
+        private void MonsterSerializeMethod()
+        {
+            foreach (var i in _monster)
             {
-                return stateMonster;
-            }
-            catch (Exception e)
-            {
-                Debug.LogError($"Serialize state monster failed {e}");
-                return false;
+                ref var monster = ref _monster.Get1(i);
+                ref var attackSpeedEnemy = ref _monster.Get2(i).blockTimer;
+                ref var entity = ref _monster.GetEntity(i);
+
+                monster.currentHP = monster.monstersAbstract._hitPointMonster;
+                Debug.Log($"Monster serialize hp = {monster.currentHP}");
+                attackSpeedEnemy = monster.monstersAbstract._attackSpeed;
+                Debug.Log($"Monster attack speed = {attackSpeedEnemy}");
+                
+                entity.Get<UpdateUIEvent>();
             }
         }
     }

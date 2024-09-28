@@ -22,7 +22,5 @@ namespace DefaultNamespace.Battle.Components.Events.BlockAttackEvents.SpawnMonst
         {
             return _spawnObject;
         }
-
-       
     }
 }

@@ -16,10 +16,7 @@ namespace DefaultNamespace.BattlePhase.Systems.BattleSystems.SpawnSystems.Respaw
             foreach (var spawnIndex in _spawnFilter)
             {
                 ref var spawnEntity = ref _spawnFilter.GetEntity(spawnIndex);
-
-                spawnEntity.Get<DestroyMonsterEvent>();
-
-
+                
                 var monsterEntity = _monsterListFilter.GetEntitiesCount() > 0
                     ? _monsterListFilter.GetEntity(0)
                     : default;
