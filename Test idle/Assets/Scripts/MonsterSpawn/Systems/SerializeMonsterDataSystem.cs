@@ -3,6 +3,7 @@ using DefaultNamespace.Battle.Components.MonsterComponents;
 using DefaultNamespace.MonsterSpawn.Components;
 using DefaultNamespace.MonsterSpawn.Events;
 using Leopotam.Ecs;
+using UnityEngine;
 
 namespace MonsterSpawn.Systems
 {
@@ -14,24 +15,33 @@ namespace MonsterSpawn.Systems
 
         public void Run()
         {
-            CreateNewEntity();
-
-            var monster = _monsterFilter.GetEntitiesCount() > 0 ? _monsterFilter.Get1(0) : default;
-
-            if (_monsterFilter.GetEntitiesCount() > 0)
-                monster.currentHP = monster.monstersAbstract.hitPoint;
-        }
-
-        private void CreateNewEntity()
-        {
-            var monsterEntity = _ecsWorld.NewEntity();
-
             foreach (var spawnIndex in _spawnFilter)
             {
-                ref var monsterData = ref _spawnFilter.Get2(spawnIndex);
+                ref var spawnSettings = ref _spawnFilter.Get2(spawnIndex);
+                ref var spawnEntity = ref _spawnFilter.GetEntity(spawnIndex);
+                
+                CreateNewEntity(spawnSettings.MonsterData, spawnSettings.BlockTimer, spawnSettings.MonsterData.hitPoint);
+                
+                Debug.Log($"Data downoland");
+                
+                if (spawnEntity != default)
+                    spawnEntity.Del<SerializeMonsterEvent>();
+            }
+        }
 
-                monsterEntity.Get<MonsterBattleComponents>().monstersAbstract = monsterData.MonsterData;
-                monsterEntity.Get<MonsterCooldownAttackComponent>().blockTimer = monsterData.BlockTimer;
+        private void CreateNewEntity(MonstersAbstract monster, float blockTimer, int hitPoint)
+        {
+            var monsterEntity = _ecsWorld.NewEntity();
+            
+            monsterEntity.Get<MonsterBattleComponents>().monstersAbstract = monster;
+            monsterEntity.Get<MonsterCooldownAttackComponent>().blockTimer = blockTimer;
+            
+            Debug.Log($"Create monster data entity");
+
+            foreach (var monsterIndex in _monsterFilter)
+            {
+                ref var hpMonster = ref _monsterFilter.Get1(monsterIndex).currentHP;
+                hpMonster = hitPoint;
             }
         }
     }

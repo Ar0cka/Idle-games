@@ -10,7 +10,6 @@ namespace MonsterSpawn.Systems
     {
         private readonly EcsFilter<SpawnSettings> _spawnFilter = null;
         private readonly EcsFilter<MonsterCheckStateComponent> _stateFilter = null;
-        private readonly EcsFilter<MonsterBattleComponents> _mosnterFilter = null;
 
         public void Run()
         {

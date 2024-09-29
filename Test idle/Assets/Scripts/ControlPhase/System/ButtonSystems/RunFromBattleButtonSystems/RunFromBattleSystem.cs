@@ -9,7 +9,6 @@ namespace DefaultNamespace.Battle.System
     public class RunFromBattleSystem : IEcsInitSystem
     {
         private EcsFilter<ButtonBattleComponent, isBattlePhaseComponent> _battleFilter = null;
-        private bool isRunCanWork = false;
         
         
         public void Init()
@@ -18,7 +17,6 @@ namespace DefaultNamespace.Battle.System
             {
                 ref var buttonRunFromBattle = ref _battleFilter.Get1(i).runFromBattle;
                 buttonRunFromBattle.onClick.AddListener(RunFromBattle);
-                isRunCanWork = false;
             }
         }
 
@@ -28,7 +26,6 @@ namespace DefaultNamespace.Battle.System
             {
                 ref var isBattlePhase = ref _battleFilter.Get2(i);
                 isBattlePhase.IsBeginBattlePhase = false;
-                isRunCanWork = true;
 
                 ref var entity = ref _battleFilter.GetEntity(i);
                 entity.Get<HideRunFromBattleUIEvent>();

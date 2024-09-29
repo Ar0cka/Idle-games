@@ -20,6 +20,7 @@ namespace MonsterSpawn.Systems.CheckStateSystem
                 ref var stateSettings = ref _stateFilter.Get1(stateIndex);
                 stateSettings.MonsterAlive = false;
                 stateSettings.CanSerializeMonsterData = false;
+                Debug.Log($"Monster alive serialize = {stateSettings.MonsterAlive} and CanSerializeMonsterData = {stateSettings.CanSerializeMonsterData}");
             }
         }
     }

@@ -9,10 +9,7 @@ namespace DefaultNamespace.Battle.System.BattleSystem.BlockSystems
 {
     public class PlayerBlockAttackSystem : IEcsRunSystem
     {
-        private EcsFilter<PlayerCooldownComponent, PlayerBlockEvent> _playerFilter = null;
-        private EcsFilter<isBattlePhaseComponent> _battleFilter = null;
-
-        
+        private EcsFilter<PlayerCooldownComponent, PlayerBlockEvent> _playerFilter = null; 
         
         public void Run()
         {

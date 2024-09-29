@@ -8,7 +8,7 @@ namespace DefaultNamespace.MonsterSpawn.MonoBehavior
 
         public void SpawnMonsterOnScene(GameObject _gameObject, RectTransform transform, GameObject parent)
         {
-            Instantiate(_gameObject, transform, parent);
+            _monsterObject = Instantiate(_gameObject, transform, parent);
         }
 
         public GameObject GetMonsterFromScene()

@@ -16,11 +16,12 @@ namespace MonsterSpawn.Systems
         {
             var monsterForSpawn = _ecsWorld.NewEntity();
             monsterForSpawn.Get<MonsterForSpawnComponent>();
+            Debug.Log($"Monster entity creat");
         }
 
         public void Run()
         {
-            foreach (var monsterListIndex in _monsterForSpawnFilter)
+            foreach (var monsterListIndex in _monsterListFilter)
             {
                 ref var monsterList = ref _monsterListFilter.Get1(monsterListIndex);
                 ref var spawnEntity = ref _monsterListFilter.GetEntity(monsterListIndex);
@@ -29,7 +30,10 @@ namespace MonsterSpawn.Systems
                 foreach (var monsterIndex in _monsterForSpawnFilter)
                 {
                     ref var monster = ref _monsterForSpawnFilter.Get1(monsterIndex);
+                    
                     monster.monsterObject = monsterList._monstersFromFirstFloor[randomCount];
+                    Debug.Log($"Send spawn event");
+                    spawnEntity.Del<ChoiceMonsterFromListEvent>();
                     spawnEntity.Get<SpawnEvent>();
                 }
             }

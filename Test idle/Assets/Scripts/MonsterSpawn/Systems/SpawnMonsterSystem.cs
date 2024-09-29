@@ -27,6 +27,8 @@ namespace MonsterSpawn.Systems
                         ref var monsterObject = ref _monsterForSpawnFilter.Get1(monsterIndex);
                         spawnSettings.monsterSpawnScript.SpawnMonsterOnScene(monsterObject.monsterObject, 
                             spawnSettings.monsterPosition, spawnSettings.parent);
+
+                        stateSettings.CanSerializeMonsterData = true;
                         spawnEntity.Del<SpawnEvent>();
                     }
                 }

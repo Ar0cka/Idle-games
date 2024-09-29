@@ -11,6 +11,7 @@ using DefaultNamespace.MonsterSpawn.Events;
 using DefaultNamespace.Player.System;
 using Leopotam.Ecs;
 using MonsterSpawn.Systems;
+using MonsterSpawn.Systems.CheckStateSystem;
 using UnityEngine;
 using Voody.UniLeo;
 
@@ -50,6 +51,7 @@ namespace DefaultNamespace
         private void AddBattlePhaseSystems()
         {  
             systems.Add(new PlayerInitSystem());
+            systems.Add(new SerializeCheckStateSystem());
     
             // Фазы битвы и интерфейс управления
             systems.Add(new BeginBattleSystem());
@@ -61,9 +63,12 @@ namespace DefaultNamespace
             systems.Add(new PlayerAttackEnemySystem());
             systems.Add(new EnemyAttackSystem());
             systems.Add(new EnemyTakeDamageSystem());
+            systems.Add(new SerializeMonsterDataSystem());
             
             // Системы, связанные со спавном монстра
             systems.Add(new TakeMonsterFromListSystem());
+            systems.Add(new SpawnMonsterSystem());
+            systems.Add(new SendSerializeEventSystem());
             
             // Системы которые относятся к battle phase
             systems.Add(new PlayerTakeDamageSystem());
@@ -102,6 +107,7 @@ namespace DefaultNamespace
             //Ивенты связанные со спавном и уничтожением монстра
             systems.OneFrame<ChoiceMonsterFromListEvent>();
             systems.OneFrame<SerializeMonsterEvent>();
+            systems.OneFrame<SpawnEvent>();
         }
         #endregion
        
