@@ -101,6 +101,7 @@ namespace DefaultNamespace
             
             //Ивенты связанные со спавном и уничтожением монстра
             systems.OneFrame<ChoiceMonsterFromListEvent>();
+            systems.OneFrame<SerializeMonsterEvent>();
         }
         #endregion
        

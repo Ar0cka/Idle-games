@@ -2,6 +2,8 @@
 {
     internal struct MonsterCheckStateComponent
     {
-        
+        public bool MonsterAlive;
+        public bool CanSerializeMonsterData;
+
     }
 }
