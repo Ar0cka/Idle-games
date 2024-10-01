@@ -62,6 +62,10 @@ namespace DefaultNamespace
             systems.Add(new OnHealButtonSystem());
             systems.Add(new SerializeAttackCooldownSystem());
             
+            // Управление концом битвы
+            systems.Add(new RunFromBattleSystem());
+            systems.Add(new EndFightControlSystem());
+            
             // Системы, связанные с битвой
             systems.Add(new PlayerAttackEnemySystem());
             systems.Add(new EnemyAttackSystem());
@@ -70,6 +74,7 @@ namespace DefaultNamespace
             
             //Уничтножение монстра
             systems.Add(new DestroyMonsterButtonSystem());
+            systems.Add(new DestroyMonsterOfTheRun());
             systems.Add(new DestroyMonster());
             systems.Add(new RespawnMonsterSystem());
             systems.Add(new BLockSpawnSystem());
@@ -89,9 +94,7 @@ namespace DefaultNamespace
             systems.Add(new MonsterUpdateHpBarSystem());
             systems.Add(new PlayerUpdateHpBarSystem());
             
-            // Управление концом битвы
-            systems.Add(new RunFromBattleSystem());
-            systems.Add(new EndFightControlSystem());
+            
 
             systems.Add(new HealHeroButtonSystem());
             systems.Add(new HideHealButtonSystem());

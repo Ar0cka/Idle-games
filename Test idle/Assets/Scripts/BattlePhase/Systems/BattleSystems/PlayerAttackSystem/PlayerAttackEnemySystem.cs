@@ -45,14 +45,13 @@ namespace DefaultNamespace.Battle.System.BattleSystem.BlockSystems
                             if (cooldown.Timer <= 0)
                             {
                                 cooldown.Timer = player._attackSpeed;
-                                
+
                                 foreach (var monsterIndex in _monsterFilter)
                                 {
                                     ref var entityMonster = ref _monsterFilter.GetEntity(monsterIndex);
-                                    
+
                                     entityMonster.Get<PlayerAttackEvent>().damagePlayer = player._damage;
                                 }
-                       
                             }
                             else
                             {

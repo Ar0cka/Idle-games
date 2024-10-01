@@ -1,7 +1,5 @@
 ﻿using DefaultNamespace.Battle.Components.BattleComponents;
-using DefaultNamespace.Battle.Components.Events.BlockAttackEvents;
 using DefaultNamespace.Battle.Components.MonsterComponents;
-using DefaultNamespace.Components;
 using DefaultNamespace.ControlPhase.Components.Events;
 using DefaultNamespace.MonsterSpawn.Components;
 using DefaultNamespace.MonsterSpawn.Events;
@@ -10,10 +8,10 @@ using UnityEngine;
 
 namespace MonsterSpawn.Systems.DestroyMonster
 {
-    public class DestroyMonster : IEcsRunSystem
+    public class DestroyMonsterOfTheRun : IEcsRunSystem
     {
+        private EcsFilter<SpawnSettings, DestroyMonsterOfTheRunFromBattleEvent> _spawnFilter;
         private readonly EcsFilter<MonsterBattleComponents> _monsterFilter = null;
-        private readonly EcsFilter<SpawnSettings, DestroyEnemyEvent> _spawnFilter = null;
         private readonly EcsFilter<MonsterCheckStateComponent> _stateFilter = null;
         private readonly EcsFilter<HpBarComponent> _barFilter = null;
 
@@ -33,31 +31,25 @@ namespace MonsterSpawn.Systems.DestroyMonster
                     ChangeStateMonster();
                     HideHpBarEnemy();
                     
-                    Debug.Log($"Monster deleted {monsterEntity}");
-                    
                     spawnEntity.Del<DestroyEnemyEvent>();
-                    spawnEntity.Get<RespawnMonsterEvent>();
-                        
-                    Debug.Log($"Send respawn event");
                 }
             }
         }
-
         private void ChangeStateMonster()
         {
-            var stateMonster = _stateFilter.GetEntitiesCount() > 0 ? _stateFilter.Get1(0) : default;
+            foreach (var stateIndex in _stateFilter)
+            {
+                ref var stateMonster = ref _stateFilter.Get1(stateIndex);
 
-            stateMonster.MonsterAlive = false;
+                stateMonster.MonsterAlive = false;
+            }
         }
-
         private void HideHpBarEnemy()
         {
-
             var barEntity = _barFilter.GetEntitiesCount() > 0 ? _barFilter.GetEntity(0) : default;
             
             if(barEntity != default) 
                 barEntity.Get<HideHpBarEnemyEvent>();
-            
         }
     }
 }

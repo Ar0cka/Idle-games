@@ -18,10 +18,11 @@ namespace MonsterSpawn.Systems
             foreach (var stateIndex in _stateFilter)
             {
                 ref var stateSettings = ref _stateFilter.Get1(stateIndex);
+                Debug.Log($"MonsterAlive = {stateSettings.MonsterAlive}");
                 if (stateSettings.MonsterAlive) continue;
 
                 foreach (var spawnIndex in _spawnFilter)
-                {
+                { 
                     ref var spawnSettings = ref _spawnFilter.Get1(spawnIndex);
                     ref var spawnEntity = ref _spawnFilter.GetEntity(spawnIndex);
 

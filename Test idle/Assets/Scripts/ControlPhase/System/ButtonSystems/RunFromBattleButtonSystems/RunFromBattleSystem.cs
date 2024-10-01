@@ -45,7 +45,7 @@ namespace DefaultNamespace.Battle.System
 
             if (spawnEntity != default)
             {
-                spawnEntity.Get<DestroyEnemyEvent>();
+                spawnEntity.Get<DestroyMonsterOfTheRunFromBattleEvent>();
             }
         }
     }
