@@ -1,7 +1,6 @@
 ﻿using DefaultNamespace.Components;
 using Leopotam.Ecs;
 using UnityEngine;
-using NotImplementedException = System.NotImplementedException;
 
 namespace DefaultNamespace.Battle.Components.Events.BlockAttackEvents
 {
@@ -19,6 +18,8 @@ namespace DefaultNamespace.Battle.Components.Events.BlockAttackEvents
                 ref var entity = ref _playerEcsFilter.GetEntity(playerIndex);
 
                 _cooldown.Timer = _player.playerSettings._attackSpeed;
+                
+                Debug.Log($"Serialize cooldown attack event");
 
                 entity.Del<SerializeAttackCooldownEvent>();
             }

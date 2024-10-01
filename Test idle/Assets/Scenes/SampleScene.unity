@@ -2776,7 +2776,6 @@ GameObject:
   - component: {fileID: 1949234104}
   - component: {fileID: 1949234103}
   - component: {fileID: 1949234102}
-  - component: {fileID: 1949234105}
   m_Layer: 5
   m_Name: Spawner
   m_TagString: Untagged
@@ -2861,20 +2860,6 @@ MonoBehaviour:
   value:
     _monstersFromFirstFloor:
     - {fileID: 1868321867802512536, guid: e6a4d2f5a8d6d5a4085d933bc24080c6, type: 3}
---- !u!114 &1949234105
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1949234097}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df6b60ec86ff4ed7aafacfc0fa6598b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  value:
-    spawnBlockTimer: 3
 --- !u!1 &2022029451
 GameObject:
   m_ObjectHideFlags: 0

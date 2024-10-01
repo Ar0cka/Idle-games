@@ -36,7 +36,6 @@ namespace MonsterSpawn.Systems
                     
                     spawnEntity.Get<SpawnEvent>();
                     spawnEntity.Del<ChoiceMonsterFromListEvent>();
-                    
                 }
             }
         }

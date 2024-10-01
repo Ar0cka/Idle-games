@@ -1,7 +1,7 @@
 ﻿using DefaultNamespace.Battle.Components.BattleComponents;
 using DefaultNamespace.ControlPhase.Components.Events;
 using Leopotam.Ecs;
-using NotImplementedException = System.NotImplementedException;
+using UnityEngine;
 
 namespace DefaultNamespace.ControlPhase.System.ControlEnemyHP
 {
@@ -17,6 +17,9 @@ namespace DefaultNamespace.ControlPhase.System.ControlEnemyHP
                 ref var barEntity = ref _hpBarFilter.GetEntity(barIndex);
                 
                 enemyBar._monsterBar.gameObject.SetActive(false);
+                
+                Debug.Log($"Hide hp bar enemy");
+                
                 barEntity.Del<HideHpBarEnemyEvent>();
             }
         }

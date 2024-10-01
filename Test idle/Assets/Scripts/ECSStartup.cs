@@ -1,5 +1,4 @@
 ﻿using BattlePhase.Systems.BattleSystems.PlayerAttackSystem;
-using DefaultNamespace.Battle.Components.BattleComponents;
 using DefaultNamespace.Battle.Components.Events;
 using DefaultNamespace.Battle.Components.Events.AttackEvents;
 using DefaultNamespace.Battle.Components.Events.BlockAttackEvents;

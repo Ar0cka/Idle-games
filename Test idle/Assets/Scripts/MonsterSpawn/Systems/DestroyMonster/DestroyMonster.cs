@@ -1,5 +1,7 @@
 ﻿using DefaultNamespace.Battle.Components.BattleComponents;
+using DefaultNamespace.Battle.Components.Events.BlockAttackEvents;
 using DefaultNamespace.Battle.Components.MonsterComponents;
+using DefaultNamespace.Components;
 using DefaultNamespace.ControlPhase.Components.Events;
 using DefaultNamespace.MonsterSpawn.Components;
 using DefaultNamespace.MonsterSpawn.Events;
@@ -13,7 +15,7 @@ namespace MonsterSpawn.Systems.DestroyMonster
         private readonly EcsFilter<MonsterBattleComponents> _monsterFilter = null;
         private readonly EcsFilter<SpawnSettings, DestroyEnemyEvent> _spawnFilter = null;
         private readonly EcsFilter<MonsterCheckStateComponent> _stateFilter = null;
-        private readonly EcsFilter<HpBarComponent, HideHpBarEnemyEvent> _barFilter = null;
+        private readonly EcsFilter<HpBarComponent> _barFilter = null;
 
         public void Run()
         {
@@ -51,10 +53,12 @@ namespace MonsterSpawn.Systems.DestroyMonster
 
         private void HideHpBarEnemy()
         {
-            var hpBarEntity = _barFilter.GetEntitiesCount() > 0 ? _barFilter.GetEntity(0) : default;
 
-            if (hpBarEntity != default)
-                hpBarEntity.Get<HideHpBarEnemyEvent>();
+            var barEntity = _barFilter.GetEntitiesCount() > 0 ? _barFilter.GetEntity(0) : default;
+            
+            if(barEntity != default) 
+                barEntity.Get<HideHpBarEnemyEvent>();
+            
         }
     }
 }
