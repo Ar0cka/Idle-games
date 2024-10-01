@@ -31,7 +31,7 @@ namespace MonsterSpawn.Systems.DestroyMonster
                     ChangeStateMonster();
                     HideHpBarEnemy();
                     
-                    spawnEntity.Del<DestroyEnemyEvent>();
+                    spawnEntity.Del<DestroyMonsterOfTheRunFromBattleEvent>();
                 }
             }
         }

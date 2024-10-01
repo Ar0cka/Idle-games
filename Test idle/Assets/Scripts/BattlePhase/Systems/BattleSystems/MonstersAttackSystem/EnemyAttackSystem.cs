@@ -22,7 +22,6 @@ namespace DefaultNamespace.Battle.System.BattleSystems.MonstersAttackSystem
                 ref var isBattle = ref _cheakBattleFilter.Get1(boolIndex).IsBeginBattlePhase;
                 if (!isBattle) continue;
                 
-                Debug.Log("Begin attack");
                 foreach (var monsterIndex in _monster)
                 {
                     ref var monster = ref _monster.Get1(monsterIndex);

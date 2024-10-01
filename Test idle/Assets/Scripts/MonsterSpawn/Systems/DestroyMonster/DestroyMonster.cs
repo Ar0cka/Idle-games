@@ -45,9 +45,12 @@ namespace MonsterSpawn.Systems.DestroyMonster
 
         private void ChangeStateMonster()
         {
-            var stateMonster = _stateFilter.GetEntitiesCount() > 0 ? _stateFilter.Get1(0) : default;
+            foreach (var stateIndex in _stateFilter)
+            {
+                ref var stateMonster = ref _stateFilter.Get1(stateIndex);
 
-            stateMonster.MonsterAlive = false;
+                stateMonster.MonsterAlive = false;
+            }
         }
 
         private void HideHpBarEnemy()
