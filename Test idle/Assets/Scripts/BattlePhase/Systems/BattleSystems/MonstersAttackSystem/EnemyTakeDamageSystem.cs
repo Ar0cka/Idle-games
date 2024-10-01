@@ -4,6 +4,8 @@ using DefaultNamespace.Battle.Components.Events.AttackEvents;
 using DefaultNamespace.Battle.Components.Events.BlockAttackEvents;
 using DefaultNamespace.Battle.Components.MonsterComponents;
 using DefaultNamespace.ControlPhase.Components.Events;
+using DefaultNamespace.MonsterSpawn.Components;
+using DefaultNamespace.MonsterSpawn.Events;
 using Leopotam.Ecs;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -14,6 +16,7 @@ namespace DefaultNamespace.Battle.System.BattleSystems.MonstersAttackSystem
     sealed class EnemyTakeDamageSystem : IEcsRunSystem
     {
         private readonly EcsFilter<MonsterBattleComponents, PlayerAttackEvent> _monsterFilter = null;
+        private readonly EcsFilter<SpawnSettings> _spawnFilter = null;
         private readonly EcsFilter<HpBarComponent> _hpBarFilter = null;
 
         public void Run()
@@ -36,6 +39,16 @@ namespace DefaultNamespace.Battle.System.BattleSystems.MonstersAttackSystem
                     }
                     
                     entity.Del<PlayerAttackEvent>();
+                }
+
+                if (monster.currentHP < 0)
+                {
+                    foreach (var spawnIndex in _spawnFilter)
+                    {
+                        ref var spawnEntity = ref _spawnFilter.GetEntity(spawnIndex);
+
+                        spawnEntity.Get<DestroyEnemyEvent>();
+                    }
                 }
             }
         }

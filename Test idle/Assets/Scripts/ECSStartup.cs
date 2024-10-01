@@ -7,7 +7,6 @@ using DefaultNamespace.Battle.System.BattleSystem.BlockSystems;
 using DefaultNamespace.Battle.System.BattleSystems.MonstersAttackSystem;
 using DefaultNamespace.ControlPhase.Components.Events;
 using DefaultNamespace.ControlPhase.System.ControlEnemyHP;
-using DefaultNamespace.ControlPhase.System.DestroyButton;
 using DefaultNamespace.MonsterSpawn.Events;
 using DefaultNamespace.Player.System;
 using Leopotam.Ecs;
@@ -73,7 +72,6 @@ namespace DefaultNamespace
             systems.Add(new SerializeMonsterDataSystem());
             
             //Уничтножение монстра
-            systems.Add(new DestroyMonsterButtonSystem());
             systems.Add(new DestroyMonsterOfTheRun());
             systems.Add(new DestroyMonster());
             systems.Add(new RespawnMonsterSystem());
