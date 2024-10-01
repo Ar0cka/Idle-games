@@ -2,7 +2,8 @@
 public class MonstersAbstract : ScriptableObject
 {
     [SerializeField] protected string nameMonster;
-    [SerializeField] protected int hitPoint;
-    [SerializeField] protected int damage;
-    [SerializeField] protected float attackSpeed;
+    public string _nameMonster => nameMonster;
+    public int hitPoint;
+    public int damage;
+    public float attackSpeed;
 }

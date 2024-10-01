@@ -12,9 +12,7 @@ GameObject:
   - component: {fileID: 1868321867802512541}
   - component: {fileID: 1868321867802512542}
   - component: {fileID: 1868321867802512540}
-  - component: {fileID: 1135289427517591991}
-  - component: {fileID: 4621964764948803154}
-  - component: {fileID: 9032329904670535548}
+  - component: {fileID: 5509177050336471506}
   m_Layer: 0
   m_Name: Goblin
   m_TagString: Untagged
@@ -136,7 +134,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.1330788, y: 1.3011675}
   m_EdgeRadius: 0
---- !u!114 &1135289427517591991
+--- !u!114 &5509177050336471506
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -145,36 +143,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1868321867802512536}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 863c7f7460b2b49abb4fa9a7ff9cb180, type: 3}
+  m_Script: {fileID: 11500000, guid: 59c2c052096e48b448dd730cf1cd8dd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  convertMode: 0
---- !u!114 &4621964764948803154
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1868321867802512536}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63b8a02018de4d9a87c34294bdb8d73a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  value:
-    monstersAbstract: {fileID: 11400000, guid: ebf5afeea47a15342be4f4965c67e057, type: 2}
-    currentHP: 0
---- !u!114 &9032329904670535548
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1868321867802512536}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ce72cc4cdaf4af4b9347a5e65c5af9f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  value:
-    blockTimer: 4
+  monstersAbstract: {fileID: 11400000, guid: ebf5afeea47a15342be4f4965c67e057, type: 2}

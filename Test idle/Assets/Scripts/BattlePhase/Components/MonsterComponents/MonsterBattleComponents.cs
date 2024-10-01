@@ -6,7 +6,7 @@ namespace DefaultNamespace.Battle.Components.MonsterComponents
     [Serializable]
     public struct MonsterBattleComponents
     {
-        public DefaultMonster monstersAbstract;
+        public MonstersAbstract monstersAbstract;
 
         public int currentHP;
     }

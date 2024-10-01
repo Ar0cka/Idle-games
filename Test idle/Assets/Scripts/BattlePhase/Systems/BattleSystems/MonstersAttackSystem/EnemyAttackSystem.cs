@@ -37,8 +37,8 @@ namespace DefaultNamespace.Battle.System.BattleSystems.MonstersAttackSystem
                         {
                             if (playerHp > 0)
                             {
-                                time.blockTimer = monster.monstersAbstract._attackSpeed; 
-                                entityPlayer.Get<MonsterAttackEvent>().damageMonster = monster.monstersAbstract._damageMonster;
+                                time.blockTimer = monster.monstersAbstract.attackSpeed; 
+                                entityPlayer.Get<MonsterAttackEvent>().damageMonster = monster.monstersAbstract.damage;
                             }
                         }
                         else
