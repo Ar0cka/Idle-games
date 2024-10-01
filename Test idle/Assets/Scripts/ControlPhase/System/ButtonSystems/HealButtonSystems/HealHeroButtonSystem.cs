@@ -33,7 +33,7 @@ namespace DefaultNamespace.Battle.System
                 ref var entity = ref _playerFilter.GetEntity(playerIndex);
 
                 player.currentHP = player.playerSettings._hitPoint;
-                entity.Get<UpdateUIEvent>();
+                entity.Get<UpdatePlayerUIEvent>();
                 
                 ButtonInteractable();
             }

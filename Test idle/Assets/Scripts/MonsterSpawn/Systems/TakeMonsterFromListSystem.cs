@@ -33,8 +33,10 @@ namespace MonsterSpawn.Systems
                     
                     monster.monsterObject = monsterList._monstersFromFirstFloor[randomCount];
                     Debug.Log($"Send spawn event");
-                    spawnEntity.Del<ChoiceMonsterFromListEvent>();
+                    
                     spawnEntity.Get<SpawnEvent>();
+                    spawnEntity.Del<ChoiceMonsterFromListEvent>();
+                    
                 }
             }
         }

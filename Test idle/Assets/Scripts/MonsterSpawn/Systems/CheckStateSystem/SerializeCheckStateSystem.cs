@@ -22,6 +22,9 @@ namespace MonsterSpawn.Systems.CheckStateSystem
                 stateSettings.CanSerializeMonsterData = false;
                 Debug.Log($"Monster alive serialize = {stateSettings.MonsterAlive} and CanSerializeMonsterData = {stateSettings.CanSerializeMonsterData}");
             }
+
+            var spawnCooldownEntity = _ecsWorld.NewEntity();
+            spawnCooldownEntity.Get<SpawnCooldownComponent>().spawnBlockTimer = 3f;
         }
     }
 }

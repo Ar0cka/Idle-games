@@ -10,6 +10,5 @@ namespace DefaultNamespace.MonsterSpawn.Components
         public RectTransform monsterPosition;
         public SpawnMonsterScript monsterSpawnScript;
         public GameObject parent;
-        public int spawnTimer;
     }
 }

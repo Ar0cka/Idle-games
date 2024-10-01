@@ -41,7 +41,8 @@ namespace DefaultNamespace.Battle.System.BattleSystem.BlockSystems
                             foreach (var monsterIndex in _monsterFilter)
                             {
                                 ref var entityMonster = ref _monsterFilter.GetEntity(monsterIndex);
-                            
+                                
+                                
                                 entityMonster.Get<PlayerAttackEvent>().damagePlayer = player._damage;
                             }
                         }

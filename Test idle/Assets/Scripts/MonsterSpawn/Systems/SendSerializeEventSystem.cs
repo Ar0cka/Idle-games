@@ -17,7 +17,7 @@ namespace MonsterSpawn.Systems
             {
                 ref var stateMonster = ref _stateFilter.Get1(stateIndex);
                 
-                if (stateMonster.CanSerializeMonsterData & stateMonster.MonsterAlive) continue;
+                if (!stateMonster.CanSerializeMonsterData) continue;
 
                 foreach (var spawnIndex in _spawnFilter)
                 {
@@ -25,9 +25,13 @@ namespace MonsterSpawn.Systems
                     ref var spawnEntity = ref _spawnFilter.GetEntity(spawnIndex);
                     
                     var monsterObject = spawnSettings.monsterSpawnScript.GetMonsterFromScene();
-                        
+                    
                     if (monsterObject != null)
-                        spawnEntity.Get<SerializeMonsterEvent>();
+                        spawnEntity.Get<SerializeMonsterEvent>().MonsterData = spawnSettings.monsterSpawnScript.GetMonsterAbstract();
+
+                    Debug.Log($"Send event serialize monster");
+
+                    stateMonster.CanSerializeMonsterData = false;
                 }
             }
         }
