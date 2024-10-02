@@ -11,6 +11,7 @@ namespace DefaultNamespace.Battle.System
     public class HealHeroButtonSystem : IEcsInitSystem
     {
         private readonly EcsFilter<PlayerSettingsComponent> _playerFilter = null;
+        private readonly EcsFilter<HpBarComponent> _barFilter = null;
         private readonly EcsFilter<ButtonBattleComponent> _buttonFilter = null;
 
         public void Init()
@@ -30,15 +31,24 @@ namespace DefaultNamespace.Battle.System
             foreach (var playerIndex in _playerFilter)
             {
                 ref var player = ref _playerFilter.Get1(playerIndex);
-                ref var entity = ref _playerFilter.GetEntity(playerIndex);
 
                 player.currentHP = player.playerSettings._hitPoint;
-                entity.Get<UpdatePlayerUIEvent>();
+               
+                UpdateUI();
                 
                 ButtonInteractable();
             }
         }
 
+        private void UpdateUI()
+        {
+            foreach (var barIndex in _barFilter)
+            {
+                ref var barEntity = ref _barFilter.GetEntity(barIndex);
+                barEntity.Get<UpdatePlayerUIEvent>();
+            }
+        }
+        
         private void ButtonInteractable()
         {
             foreach (var buttonIndex in _buttonFilter)

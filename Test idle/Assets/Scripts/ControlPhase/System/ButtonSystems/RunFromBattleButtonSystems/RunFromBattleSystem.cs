@@ -10,8 +10,9 @@ namespace DefaultNamespace.Battle.System
 {
     public class RunFromBattleSystem : IEcsInitSystem
     {
-        private EcsFilter<ButtonBattleComponent, isBattlePhaseComponent> _battleFilter = null;
-        private EcsFilter<SpawnSettings> _spawnFilter = null;
+        private readonly EcsFilter<ButtonBattleComponent, isBattlePhaseComponent> _battleFilter = null;
+        private readonly EcsFilter<MonsterCheckStateComponent> _stateFilter = null;
+        private readonly EcsFilter<SpawnSettings> _spawnFilter = null;
         
         
         public void Init()
@@ -41,11 +42,19 @@ namespace DefaultNamespace.Battle.System
 
         private void SendDestroyEvent()
         {
-            var spawnEntity = _spawnFilter.GetEntitiesCount() > 0 ? _spawnFilter.GetEntity(0) : default;
-
-            if (spawnEntity != default)
+            foreach (var spawnIndex in _spawnFilter)
             {
-                spawnEntity.Get<DestroyMonsterOfTheRunFromBattleEvent>();
+                ref var spawnEntity = ref _spawnFilter.GetEntity(spawnIndex);
+
+                foreach (var stateIndex in _stateFilter)
+                {
+                    ref var monsterAlive = ref _stateFilter.Get1(stateIndex).MonsterAlive;
+
+                    if (monsterAlive)
+                    {
+                        spawnEntity.Get<DestroyMonsterOfTheRunFromBattleEvent>();
+                    }
+                }
             }
         }
     }
