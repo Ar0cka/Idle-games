@@ -9,6 +9,7 @@ using DefaultNamespace.ControlPhase.Components.Events;
 using DefaultNamespace.ControlPhase.System.ControlEnemyHP;
 using DefaultNamespace.MonsterSpawn.Events;
 using DefaultNamespace.Player.System;
+using DefaultNamespace.SceneUI.Menu.Systems;
 using Leopotam.Ecs;
 using MonsterSpawn.Systems;
 using MonsterSpawn.Systems.CheckStateSystem;
@@ -30,10 +31,28 @@ namespace DefaultNamespace
             systems = new EcsSystems(world);
             
             systems.ConvertScene();
-            
+
+            #region injections
+
             AddBattlePhaseInjections();
+            AddUIInjections();
+
+            #endregion
+
+            #region systems
+
             AddBattlePhaseSystems();
+            AddUISystems();
+
+            #endregion
+
+            #region OneFrames
+
             AddBattlePhaseOneFrames();
+            AddUIOneFrames();
+
+            #endregion
+           
             
             systems.Init();
         }
@@ -123,6 +142,24 @@ namespace DefaultNamespace
             systems.OneFrame<DestroyEnemyEvent>();
             systems.OneFrame<DestroyMonsterOfTheRunFromBattleEvent>();
             systems.OneFrame<RespawnMonsterEvent>();
+        }
+        #endregion
+
+        #region UIRegion
+
+        private void AddUIInjections()
+        {
+           
+        }
+        private void AddUISystems()
+        {
+            systems.Add(new OpenMenuOnBattleScene());
+            systems.Add(new CloseMenuSystem());
+            systems.Add(new SerializeTextOnMenuSystem());
+        }
+        
+        private void AddUIOneFrames()
+        {
         }
         #endregion
        

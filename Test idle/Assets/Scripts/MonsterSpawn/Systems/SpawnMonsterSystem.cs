@@ -53,7 +53,7 @@ namespace MonsterSpawn.Systems
                                         stateSettings.CanSerializeMonsterData = true;
                                         stateSettings.MonsterAlive = true;
                                         spawnCooldown = 3f;
-                                        spawnEntity.Del<SpawnEvent>();
+                                        spawnEntity.Del<SpawnEvent>(); 
                                     }
                                     else
                                     {

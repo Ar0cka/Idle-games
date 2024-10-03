@@ -27,12 +27,20 @@ namespace BattlePhase.Systems.BattleSystems.PlayerAttackSystem
                 
                 if (damageMonster > 0)
                 {
-                    player.currentHP -= damageMonster;
+                    var effectiveArmour = player.playerSettings._armour / (1 + player.playerSettings._armour * 0.05f);
+                    var damage = Mathf.Max(0, damageMonster - effectiveArmour);
+                    
+                    player.currentHP -= damage;
                     
                     if (barEntity != default)
                     barEntity.Get<UpdatePlayerUIEvent>();
                     
                     entity.Del<MonsterAttackEvent>();
+                }
+
+                if (player.currentHP <= 0)
+                {
+                    player.currentHP = 0;
                 }
             }
         }

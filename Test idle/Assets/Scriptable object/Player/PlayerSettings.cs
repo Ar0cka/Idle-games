@@ -14,4 +14,24 @@ public class PlayerSettings : ScriptableObject
 
     [SerializeField] private float attackSpeed;
     public float _attackSpeed => attackSpeed;
+
+    public void UpgradeHitPoint(int buffHp)
+    {
+        hitPoint += buffHp;
+    }
+
+    public void UpgradeDamage(int buffDamage)
+    {
+        damage += buffDamage;
+    }
+
+    public void UpgradeArmour(int buffArmour)
+    {
+        armour += buffArmour;
+    }
+
+    public void UpgradeAttackSpeed(float buffSpeedAttack)
+    {
+        attackSpeed += buffSpeedAttack;
+    }
 }

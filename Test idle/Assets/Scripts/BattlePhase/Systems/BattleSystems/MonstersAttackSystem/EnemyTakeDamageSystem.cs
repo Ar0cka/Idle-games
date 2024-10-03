@@ -41,8 +41,10 @@ namespace DefaultNamespace.Battle.System.BattleSystems.MonstersAttackSystem
                     entity.Del<PlayerAttackEvent>();
                 }
 
-                if (monster.currentHP < 0)
+                if (monster.currentHP <= 0)
                 {
+                    monster.currentHP = 0;
+                    
                     foreach (var spawnIndex in _spawnFilter)
                     {
                         ref var spawnEntity = ref _spawnFilter.GetEntity(spawnIndex);

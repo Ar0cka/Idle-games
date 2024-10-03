@@ -7,6 +7,6 @@ namespace DefaultNamespace.Components
     public struct PlayerSettingsComponent
     {
         public PlayerSettings playerSettings;
-        public int currentHP;
+        public float currentHP;
     }
 }
