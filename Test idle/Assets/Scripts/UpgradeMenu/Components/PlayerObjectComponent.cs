@@ -3,7 +3,7 @@
 namespace DefaultNamespace.UpgradeMenu.Components
 {
     [Serializable]
-    public struct PlayerObject
+    public struct PlayerObjectComponent
     {
         public PlayerSettings player;
     }
