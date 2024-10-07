@@ -8,6 +8,6 @@ namespace DefaultNamespace.Battle.Components.MonsterComponents
     {
         public MonstersAbstract monstersAbstract;
 
-        public int currentHP;
+        public float currentHP;
     }
 }

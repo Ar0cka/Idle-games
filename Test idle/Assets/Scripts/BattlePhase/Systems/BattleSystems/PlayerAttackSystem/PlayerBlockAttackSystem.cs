@@ -11,7 +11,6 @@ namespace DefaultNamespace.Battle.System.BattleSystem.BlockSystems
     public class PlayerBlockAttackSystem : IEcsRunSystem
     {
         private readonly EcsFilter<PlayerCooldownComponent, PlayerBlockEvent> _playerFilter = null;
-        private readonly EcsFilter<MonsterCheckStateComponent> _monsterStateFilter = null;
         
         public void Run()
         {

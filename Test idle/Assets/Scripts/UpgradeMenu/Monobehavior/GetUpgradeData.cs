@@ -1,16 +1,38 @@
-﻿using Scriptable_object.UpgradeData;
+﻿using System;
+using DefaultNamespace.UpgradeMenu.Event;
+using Leopotam.Ecs;
+using Scriptable_object.UpgradeData;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace DefaultNamespace.UpgradeMenu.Monobehavior
 {
 
     public class GetUpgradeData : MonoBehaviour
     {
-        [SerializeField] private UpgradeEmpty upgradeData;
+        
+        [SerializeField] private UpgradeFloatData upgradeData;
+        private bool buttonUsed = false;
+        
 
-        private UpgradeEmpty GetData()
+        public void GetData()
         {
-            return upgradeData;
+            if (ECSStartupOnUpgradeScene.world != null)
+            {
+                if (!buttonUsed)
+                {
+                    var entity = ECSStartupOnUpgradeScene.world.NewEntity();
+                    entity.Get<UpStatsPlayerEvent>().upgradeEmpty = upgradeData;
+                    
+                    GetComponent<Button>().interactable = false;
+                    
+                    buttonUsed = true;
+                }
+            }
+            else
+            {
+                Debug.LogError($"ecs dont find");
+            }
         }
     }
 }

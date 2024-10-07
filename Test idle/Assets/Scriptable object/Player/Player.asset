@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3eb07925c9ba0414991351fe8bbf07de, type: 3}
   m_Name: Player
   m_EditorClassIdentifier: 
-  hitPoint: 20
-  damage: 2
-  armour: 4
-  attackSpeed: 3
+  hitPoint: 15
+  damage: 1
+  armour: 0.1
+  attackSpeed: 4

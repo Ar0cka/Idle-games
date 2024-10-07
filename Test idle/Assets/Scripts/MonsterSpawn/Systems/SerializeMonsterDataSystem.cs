@@ -41,7 +41,7 @@ namespace MonsterSpawn.Systems
             }
         }
 
-        private void CreateNewEntity(MonstersAbstract monster, int hitPoint)
+        private void CreateNewEntity(MonstersAbstract monster, float hitPoint)
         {
             var monsterEntity = _ecsWorld.NewEntity();
             

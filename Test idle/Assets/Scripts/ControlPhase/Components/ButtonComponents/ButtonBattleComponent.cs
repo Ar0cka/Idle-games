@@ -9,5 +9,6 @@ namespace DefaultNamespace.Battle.Components.BattleComponents
         public Button beginBattle;
         public Button runFromBattle;
         public Button healButton;
+        public Button attackHero;
     }
 }

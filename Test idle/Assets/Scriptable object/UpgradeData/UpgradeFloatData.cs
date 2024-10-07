@@ -1,15 +1,17 @@
-﻿using UnityEngine;
+﻿using DefaultNamespace.UpgradeMenu;
+using Unity.VisualScripting;
+using UnityEngine;
 
 namespace Scriptable_object.UpgradeData
 {
-    [CreateAssetMenu(fileName = "Upgrade data", menuName = "UpgradeStats", order = 0)]
-    public class UpgradeFloatData : UpgradeEmpty
+    [CreateAssetMenu(fileName = "Upgrade data", menuName = "UpgradeStatsFloat", order = 0)]
+    public class UpgradeFloatData : ScriptableObject
     {
-        [SerializeField] private float upgradeFloatStats;
+        [SerializeField] private StatesType _statesType;
+        public StatesType statesType => _statesType;
+        
+        [SerializeField] private float _upgradeFloatStats;
+        public float upgradeFloatStats => _upgradeFloatStats;
 
-        public float GetFloatStats()
-        {
-            return upgradeFloatStats;
-        }
     }
 }

@@ -2,6 +2,6 @@
 {
     internal struct PlayerAttackEvent
     {
-        public int damagePlayer;
+        public float damagePlayer;
     }
 }

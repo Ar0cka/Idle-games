@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af5526dc1121453eaceeb5434fe3343d, type: 3}
+  m_Name: Heal
+  m_EditorClassIdentifier: 
+  _nameItem: Life
+  _description: "\u0425\u0438\u043B\u0438\u0442 \u043D\u0430 10\u0445\u043F"
+  _itemType: 1
+  _itemCategory: 0
+  _consumableItem: 0
+  iconItem: {fileID: 21300000, guid: 464d361f828d4dc42993dda0565fe920, type: 3}
+  countItemForStack: 100
+  _quantityBuff: 10
