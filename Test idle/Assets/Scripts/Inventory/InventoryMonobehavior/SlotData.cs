@@ -83,9 +83,9 @@ namespace Inventory
             return false;
         }
 
-        public void ChangeListener(bool isAddLisntener)
+        public void ChangeListener(bool isAddListener)
         {
-            isHaveListener = isAddLisntener;
+            isHaveListener = isAddListener;
         }
     }
 }

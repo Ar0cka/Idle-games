@@ -1,5 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using Inventory.Events;
+using Leopotam.Ecs;
+using Scriptable_object.Items;
 using UnityEngine;
 
 namespace Inventory
@@ -7,6 +11,7 @@ namespace Inventory
     public class InventoryEquip : MonoBehaviour
     {
         [SerializeField] private List<GameObject> _slots = new List<GameObject>(5);
+        [SerializeField] private InventorySettings _inventorySettings;
         private List<EquipSlotData> _slotData = new List<EquipSlotData>();
 
         private void Awake()
@@ -24,22 +29,31 @@ namespace Inventory
             {
                 if (!slot.isOccupied && slotType == slot.slotType)
                 {
-                    slot.onSlotGameObject = Instantiate(itemInEquip, slot.slot.transform);
+                    Instantiate(itemInEquip, slot.slot.transform);
+                    Destroy(itemInEquip);
                     slot.ItemIsOccupied(true);
                     break;
                 }
             }
         }
 
-        public void ChangeItemToEquipSlot(GameObject itemInEquip,  SlotType slotType, Transform inventorySlot)
+        public void ChangeItemToEquipSlot(GameObject itemInEquip,  SlotType slotType, SlotData slotData)
         {
             foreach (var slot in _slotData)
             {
                 if (slot.isOccupied && slotType == slot.slotType)
                 {
-                    Instantiate(slot.onSlotGameObject, inventorySlot);
-                    Destroy(slot.onSlotGameObject);
-                    slot.onSlotGameObject = Instantiate(itemInEquip, slot.slot.transform);
+                    var item = GetItemFromEquipSlot(slot);
+
+                    if (slotData._slot.GetComponentInChildren<ItemSettings>().baseAbstractItem is EquipItem equipItem)
+                    {
+                        Destroy(_inventorySettings.GetItemFromSlot(slotData));
+                        _inventorySettings.AddNewNonCollectItemToList(item);
+                        Destroy(GetItemFromEquipSlot(slot));
+                        AddNewItemToEquipSlot(_inventorySettings.GetItemFromSlot(slotData), equipItem.slotType);
+                        
+                    }
+                    break;
                 }
             }
         }
@@ -50,10 +64,21 @@ namespace Inventory
             {
                 if (slot.isOccupied && slotType == slot.slotType)
                 {
-                    Destroy(slot.onSlotGameObject);
+                    Destroy(GetItemFromEquipSlot(slot));
                     slot.ItemIsOccupied(false);
                 }
             }
+        }
+
+        public GameObject GetItemFromEquipSlot(EquipSlotData slotData)
+        {
+            GameObject item = slotData.slot.GetComponentInChildren<ItemSettings>().gameObject;
+            return item != null ? item.gameObject : null;
+        }
+
+        public EquipSlotData GetSlotData(SlotType slotType)
+        {
+            return _slotData.FirstOrDefault(slot => slot.slotType == slotType);
         }
     }
 }

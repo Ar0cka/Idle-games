@@ -136,6 +136,7 @@ namespace DefaultNamespace
             systems.Add(new TakeActionBuffItem());
             systems.Add(new TakeActionEquipItem());
             systems.Add(new HealFromPotionSystems());
+            systems.Add(new ArmourTakeSystem());
             systems.Add(new ControlStateItemsFromInventory());
         }
         

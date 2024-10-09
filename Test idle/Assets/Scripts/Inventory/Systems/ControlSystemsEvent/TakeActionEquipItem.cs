@@ -1,6 +1,7 @@
 ﻿using Inventory.Events;
 using Leopotam.Ecs;
 using Scriptable_object.Items;
+using UnityEngine;
 
 namespace Inventory.Systems
 {
@@ -36,13 +37,13 @@ namespace Inventory.Systems
 
         private void SendArmourEquipEvent(EquipItem equipItem, SlotData slotData)
         {
+            Debug.Log("Slot data = " + slotData);
             var entityAction = _ecsWorld.NewEntity();
             var armourAction = new ArmourActionEvent()
             {
                 _equipItem = equipItem,
                 _slotData = slotData
             };
-
             entityAction.Get<ArmourActionEvent>() = armourAction;
         }
     }

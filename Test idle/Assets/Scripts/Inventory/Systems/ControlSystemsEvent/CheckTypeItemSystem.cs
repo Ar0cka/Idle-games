@@ -39,10 +39,12 @@ namespace Inventory.Systems
                         {
                             var takeType = new TakeTypeEquipItemEvent()
                             {
-                                equipItem = equipItem
+                                equipItem = equipItem,
+                                slotData = takeAction.slotData
                             };
                             
                             typeEntity.Get<TakeTypeEquipItemEvent>() = takeType;
+                            entity.Destroy();
                         }
                         break;
                 }

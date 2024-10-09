@@ -1,5 +1,6 @@
 ﻿using Inventory.Events;
 using Leopotam.Ecs;
+using Scriptable_object.Items;
 using UnityEditorInternal.VersionControl;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,16 +18,26 @@ namespace Inventory.Systems
             {
                 ref var slotData = ref _itemFilter.Get1(itemIndex).slotData;
                 ref var entityItem = ref _itemFilter.GetEntity(itemIndex);
-                
-                slotData.DeleteOneItemFromColecteSlot(1);
-                
-                _inventorySettings.UpdateCountToSlot(slotData);
 
-                if (slotData.countItemToSlot == 0)
+                var typeItem = slotData._slot.GetComponentInChildren<ItemSettings>().baseAbstractItem;
+
+                if (typeItem.itemType == ItemType.CollectItem)
                 {
-                    slotData.DeleteItemFromSlot();
+                    slotData.DeleteOneItemFromColecteSlot(1);
+                
+                    _inventorySettings.UpdateCountToSlot(slotData);
+
+                    if (slotData.countItemToSlot == 0)
+                    {
+                        slotData.DeleteItemFromSlot();
+                        DeleteListenerFromUsedItem();
+                        _inventorySettings.UseItemFromSlot(slotData);
+                    }
+                    
+                }
+                else if (typeItem.itemType == ItemType.BaseItem)
+                {
                     DeleteListenerFromUsedItem();
-                    _inventorySettings.UseItemFromSlot(slotData);
                 }
                 entityItem.Destroy();
             }

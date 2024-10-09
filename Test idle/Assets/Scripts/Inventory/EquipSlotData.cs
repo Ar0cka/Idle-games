@@ -9,8 +9,6 @@ namespace Inventory
         public SlotType slotType { get; private set; }
         public GameObject slot { get; private set; }
 
-        public GameObject onSlotGameObject { get; set; }
-
         public EquipSlotData(GameObject _slot, SlotType _slotType)
         {
             slot = _slot;

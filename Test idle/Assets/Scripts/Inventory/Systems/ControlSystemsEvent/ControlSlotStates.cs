@@ -1,4 +1,5 @@
-﻿using Inventory.Events;
+﻿using System;
+using Inventory.Events;
 using Leopotam.Ecs;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,6 +10,7 @@ namespace Inventory.Systems
     {
         private EcsWorld _ecsWorld;
         private InventorySettings _inventorySettings;
+        private int MaxRetries = 5;
 
         public void Run()
         {
@@ -27,16 +29,42 @@ namespace Inventory.Systems
 
         private void SendEventChoiceActionItem(SlotData slotData)
         {
-            var entity = _ecsWorld.NewEntity();
-
-            var takeActionEvent = new TakeActionEvent()
-            {
-                slotData = slotData,
-                baseAbstract = slotData._slot.GetComponentInChildren<ItemSettings>().baseAbstractItem
-            };
+            int attempt = 0;
+            bool success = false;
             
-            entity.Get<TakeActionEvent>() = takeActionEvent;
-            Debug.Log("Send takeActionEvent");
+            Debug.Log($"slotData {slotData._slot.name}");
+
+            while (attempt < MaxRetries && !success)
+            {
+                try
+                {
+                    // Попытка получить baseAbstract
+                    var baseAbstract = slotData._slot.GetComponentInChildren<ItemSettings>().baseAbstractItem;
+                
+                    // Если всё прошло успешно, создаём событие
+                    var entity = _ecsWorld.NewEntity();
+                    var takeActionEvent = new TakeActionEvent()
+                    {
+                        slotData = slotData,
+                        baseAbstract = baseAbstract
+                    };
+
+                    entity.Get<TakeActionEvent>() = takeActionEvent;
+                    Debug.Log("Send takeActionEvent");
+                
+                    success = true; // Завершаем цикл, если успешна попытка
+                }
+                catch (Exception e)
+                {
+                    attempt++;
+                    Debug.LogError($"Error on attempt {attempt}: {e.Message}");
+                }
+            }
+
+            if (!success)
+            {
+                Debug.LogError("Failed to send event after multiple attempts.");
+            }
         }
-    }
+    } 
 }

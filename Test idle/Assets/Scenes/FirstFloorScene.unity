@@ -5129,6 +5129,7 @@ MonoBehaviour:
   - {fileID: 2072481570}
   - {fileID: 390977190}
   - {fileID: 307528623}
+  _inventorySettings: {fileID: 1374232970}
 --- !u!1 &1405678627
 GameObject:
   m_ObjectHideFlags: 0
