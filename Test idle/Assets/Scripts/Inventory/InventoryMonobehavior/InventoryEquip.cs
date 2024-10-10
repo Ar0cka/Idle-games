@@ -23,21 +23,32 @@ namespace Inventory
             _slotData.Add(new EquipSlotData(_slots[4], SlotType.SecondWeapon));
         }
 
-        public void AddNewItemToEquipSlot(GameObject itemInEquip, SlotType slotType)
+        public void AddNewItemToEquipSlot(SlotType slotType, EcsEntity _ecsEntity, SlotData slotData)
         {
             foreach (var slot in _slotData)
             {
                 if (!slot.isOccupied && slotType == slot.slotType)
                 {
-                    Instantiate(itemInEquip, slot.slot.transform);
-                    Destroy(itemInEquip);
-                    slot.ItemIsOccupied(true);
+                    // Перенос предмета в эквип. Нам нужно достать нужный объект и перенести его в Equip при этом, поменять состояние слота, в котором находился предмет, будто бы он удален.
+                    var item = slotData._slot.GetComponentInChildren<ItemSettings>().gameObject;
+                    Transform slotTransform = slot.slot.transform;
+
+                    var itemSlotSettings = new BaseItemUseEvent()
+                    {
+                        _item = item,
+                        slotData = slotData
+                    };
+                    
+                    _ecsEntity.Get<BaseItemUseEvent>() = itemSlotSettings;
+                    Debug.Log("Ecs entity get BaseItemUseEvent");
+                    
+                    item.transform.SetParent(slotTransform, false); 
                     break;
                 }
             }
         }
 
-        public void ChangeItemToEquipSlot(GameObject itemInEquip,  SlotType slotType, SlotData slotData)
+        public void ChangeItemToEquipSlot(SlotType slotType, SlotData slotData, EcsEntity _ecsEntity)
         {
             foreach (var slot in _slotData)
             {
@@ -45,14 +56,14 @@ namespace Inventory
                 {
                     var item = GetItemFromEquipSlot(slot);
 
-                    if (slotData._slot.GetComponentInChildren<ItemSettings>().baseAbstractItem is EquipItem equipItem)
+                    if (item.GetComponentInChildren<ItemSettings>().baseAbstractItem is EquipItem equipItem)
                     {
-                        Destroy(_inventorySettings.GetItemFromSlot(slotData));
-                        _inventorySettings.AddNewNonCollectItemToList(item);
-                        Destroy(GetItemFromEquipSlot(slot));
-                        AddNewItemToEquipSlot(_inventorySettings.GetItemFromSlot(slotData), equipItem.slotType);
+                        DeleteItemFromEquipSlot(GetItemFromEquipSlot(slot), slotType);
+                        AddNewItemToEquipSlot(equipItem.slotType, _ecsEntity, slotData);
                         
+                        _inventorySettings.AddNewNonCollectItemToList(item);
                     }
+
                     break;
                 }
             }

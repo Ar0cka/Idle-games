@@ -84,7 +84,7 @@ namespace Inventory
         }
 
         public GameObject GetItemFromSlot(SlotData _slotData)
-        {
+        { 
             GameObject item = _slotData._slot.GetComponentInChildren<ItemSettings>().gameObject;
             return item;
         }

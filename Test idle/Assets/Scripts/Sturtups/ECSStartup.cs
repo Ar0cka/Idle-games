@@ -137,7 +137,8 @@ namespace DefaultNamespace
             systems.Add(new TakeActionEquipItem());
             systems.Add(new HealFromPotionSystems());
             systems.Add(new ArmourTakeSystem());
-            systems.Add(new ControlStateItemsFromInventory());
+            systems.Add(new ControlColectedStateItemsFromInventory());
+            systems.Add(new ControlBaseStateItems());
         }
         
         private void AddBattlePhaseOneFrames()

@@ -1,6 +1,6 @@
 ﻿namespace Inventory.Events
 {
-    public struct ItemUsedEvent
+    public struct ColectItemUsedInInventoryEvent
     {
         public SlotData slotData;
     }

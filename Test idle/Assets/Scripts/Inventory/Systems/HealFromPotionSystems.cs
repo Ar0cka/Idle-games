@@ -48,7 +48,7 @@ namespace Inventory.Systems
         private void SendItemUsedEvent(SlotData slotData)
         {
             var entity = _ecsWorld.NewEntity();
-            entity.Get<ItemUsedEvent>().slotData = slotData;
+            entity.Get<ColectItemUsedInInventoryEvent>().slotData = slotData;
         }
         
         private void UpdatePlayerUI()

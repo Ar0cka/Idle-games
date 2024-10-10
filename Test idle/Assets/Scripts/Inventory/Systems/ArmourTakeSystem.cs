@@ -20,16 +20,17 @@ namespace Inventory.Systems
 
                 if (!_inventoryEquip.GetSlotData(itemData._equipItem.slotType).isOccupied)
                 {
+                    var ecsEntity = _ecsWorld.NewEntity();
                     var item = _inventorySettings.GetItemFromSlot(itemData._slotData);
-                    _inventoryEquip.AddNewItemToEquipSlot(item, itemData._equipItem.slotType);
+                    _inventoryEquip.AddNewItemToEquipSlot(itemData._equipItem.slotType, ecsEntity, itemData._slotData);
 
                     Debug.Log("Add qeuip item");
                 }
                 
                 else if (_inventoryEquip.GetSlotData((itemData._equipItem.slotType)).isOccupied)
                 {
-                    var item = _inventorySettings.GetItemFromSlot(itemData._slotData);
-                    _inventoryEquip.ChangeItemToEquipSlot(item, itemData._equipItem.slotType, itemData._slotData);
+                    var ecsEntity = _ecsWorld.NewEntity();
+                    _inventoryEquip.ChangeItemToEquipSlot(itemData._equipItem.slotType, itemData._slotData, ecsEntity);
                     
                     Debug.Log("Change item");
                 }

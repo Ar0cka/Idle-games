@@ -7,10 +7,10 @@ using UnityEngine.UI;
 
 namespace Inventory.Systems
 {
-    public class ControlStateItemsFromInventory : IEcsRunSystem 
+    public class ControlColectedStateItemsFromInventory : IEcsRunSystem 
     {
         private InventorySettings _inventorySettings;
-        private readonly EcsFilter<ItemUsedEvent> _itemFilter = null;
+        private readonly EcsFilter<ColectItemUsedInInventoryEvent> _itemFilter = null;
 
         public void Run()
         {
@@ -18,27 +18,18 @@ namespace Inventory.Systems
             {
                 ref var slotData = ref _itemFilter.Get1(itemIndex).slotData;
                 ref var entityItem = ref _itemFilter.GetEntity(itemIndex);
-
-                var typeItem = slotData._slot.GetComponentInChildren<ItemSettings>().baseAbstractItem;
-
-                if (typeItem.itemType == ItemType.CollectItem)
-                {
-                    slotData.DeleteOneItemFromColecteSlot(1);
                 
-                    _inventorySettings.UpdateCountToSlot(slotData);
+                slotData.DeleteOneItemFromColecteSlot(1);
 
-                    if (slotData.countItemToSlot == 0)
-                    {
-                        slotData.DeleteItemFromSlot();
-                        DeleteListenerFromUsedItem();
-                        _inventorySettings.UseItemFromSlot(slotData);
-                    }
-                    
-                }
-                else if (typeItem.itemType == ItemType.BaseItem)
+                _inventorySettings.UpdateCountToSlot(slotData);
+
+                if (slotData.countItemToSlot == 0) 
                 {
+                    slotData.DeleteItemFromSlot(); 
                     DeleteListenerFromUsedItem();
+                    _inventorySettings.UseItemFromSlot(slotData);
                 }
+                
                 entityItem.Destroy();
             }
         }
