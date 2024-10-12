@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using Inventory.Events;
 using JetBrains.Annotations;
+using Leopotam.Ecs;
 using Scriptable_object.Items;
 using TMPro;
 using Unity.VisualScripting;
@@ -65,6 +67,24 @@ namespace Inventory
                             break;
                         }
                     }
+                }
+            }
+        }
+
+        public void ReturnItemFromEquipSlot(EquipSlotData slotData, EcsEntity _entity)
+        {
+            for (int i = 0; i < _slots.Count; i++)
+            {
+                bool isFull = _slots[i].isFull;
+                bool isOccupied = _slots[i].IsOccupied;
+                
+                if (!isFull && !isOccupied)
+                {
+                    slotData.slot.GetComponentInChildren<ItemSettings>().transform.SetParent(_slots[i]._slot.transform, false);
+                    _slots[i].NonCollectObjectAddToInventory();
+                    slotData.ItemIsOccupied(false);
+                    _entity.Get<DeleteItemFromEquipSlotEvent>();
+                    break;
                 }
             }
         }

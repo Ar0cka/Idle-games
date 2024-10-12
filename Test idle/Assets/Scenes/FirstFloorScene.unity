@@ -3697,7 +3697,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ac760ee89fc4f9cb3d662e5e8a46fa6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _itemForDrop: {fileID: 8995313909136162956, guid: 592a8d8d623d570408cd084a5002caf0, type: 3}
+  _itemForDrop: {fileID: 3686394500900345135, guid: a82260f67a0556a45b72688136bc7ed5, type: 3}
   _inventorySettings: {fileID: 1374232970}
 --- !u!1 &1068925366
 GameObject:
@@ -3932,6 +3932,7 @@ GameObject:
   - component: {fileID: 1124659252}
   - component: {fileID: 1124659254}
   - component: {fileID: 1124659253}
+  - component: {fileID: 1124659255}
   m_Layer: 5
   m_Name: MenuUI
   m_TagString: Untagged
@@ -3990,6 +3991,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   convertMode: 0
+--- !u!114 &1124659255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1124659251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 023b393912714742b47518a5f9076af1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  value:
+    hpText: {fileID: 298399745}
+    damageText: {fileID: 954694640}
+    attackSpeedText: {fileID: 1864243510}
+    armorText: {fileID: 1002307529}
 --- !u!1 &1175874801
 GameObject:
   m_ObjectHideFlags: 0
@@ -5794,9 +5812,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1695090663}
-  - component: {fileID: 1695090666}
   - component: {fileID: 1695090665}
-  - component: {fileID: 1695090664}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -5828,19 +5844,6 @@ RectTransform:
   m_AnchoredPosition: {x: 52.699997, y: -0.0000019073486}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1695090664
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1695090662}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 863c7f7460b2b49abb4fa9a7ff9cb180, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  convertMode: 0
 --- !u!114 &1695090665
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5867,23 +5870,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &1695090666
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1695090662}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 023b393912714742b47518a5f9076af1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  value:
-    hpText: {fileID: 298399745}
-    damageText: {fileID: 954694640}
-    attackSpeedText: {fileID: 1864243510}
-    armorText: {fileID: 1002307529}
 --- !u!1 &1698133454
 GameObject:
   m_ObjectHideFlags: 0

@@ -43,6 +43,7 @@ namespace Inventory
                     Debug.Log("Ecs entity get BaseItemUseEvent");
                     
                     item.transform.SetParent(slotTransform, false); 
+                    slot.ItemIsOccupied(true);
                     break;
                 }
             }
@@ -58,10 +59,8 @@ namespace Inventory
 
                     if (item.GetComponentInChildren<ItemSettings>().baseAbstractItem is EquipItem equipItem)
                     {
-                        DeleteItemFromEquipSlot(GetItemFromEquipSlot(slot), slotType);
+                        _inventorySettings.ReturnItemFromEquipSlot(slot, _ecsEntity);
                         AddNewItemToEquipSlot(equipItem.slotType, _ecsEntity, slotData);
-                        
-                        _inventorySettings.AddNewNonCollectItemToList(item);
                     }
 
                     break;

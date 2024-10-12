@@ -42,21 +42,18 @@ namespace DefaultNamespace
             #region injections
 
             AddBattlePhaseInjections();
-            AddUIInjections();
 
             #endregion
 
             #region systems
 
             AddBattlePhaseSystems();
-            AddUISystems();
 
             #endregion
 
             #region OneFrames
 
             AddBattlePhaseOneFrames();
-            AddUIOneFrames();
 
             #endregion
            
@@ -113,6 +110,8 @@ namespace DefaultNamespace
             systems.Add(new OnHpBarEnemySystem());
             systems.Add(new HideHpBarEnemySystem());
             
+            SerializeMenu(); // системы для сериализации меню игрока
+            
             //Системы для работы с предметами в инвентаре
             AddNewControlInventorySystems();
             
@@ -139,6 +138,14 @@ namespace DefaultNamespace
             systems.Add(new ArmourTakeSystem());
             systems.Add(new ControlColectedStateItemsFromInventory());
             systems.Add(new ControlBaseStateItems());
+            systems.Add(new UpdateMenuUISystem());
+        }
+
+        private void SerializeMenu()
+        {
+           
+            systems.Add(new OpenMenuOnBattleScene());
+            systems.Add(new CloseMenuSystem());
         }
         
         private void AddBattlePhaseOneFrames()
@@ -165,24 +172,6 @@ namespace DefaultNamespace
             systems.OneFrame<DestroyEnemyEvent>();
             systems.OneFrame<DestroyMonsterOfTheRunFromBattleEvent>();
             systems.OneFrame<RespawnMonsterEvent>();
-        }
-        #endregion
-
-        #region UIRegion
-
-        private void AddUIInjections()
-        {
-           
-        }
-        private void AddUISystems()
-        {
-            systems.Add(new OpenMenuOnBattleScene());
-            systems.Add(new CloseMenuSystem());
-            systems.Add(new SerializeTextOnMenuSystem());
-        }
-        
-        private void AddUIOneFrames()
-        {
         }
         #endregion
        

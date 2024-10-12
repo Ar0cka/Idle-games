@@ -9,6 +9,8 @@ namespace Inventory.Systems
     {
         private EcsWorld _ecsWorld;
         private readonly EcsFilter<TakeTypeEquipItemEvent> _itemFilter;
+        private InventorySettings _inventorySettings;
+        private InventoryEquip _inventoryEquip;
 
         public void Run()
         {
@@ -17,34 +19,40 @@ namespace Inventory.Systems
                 ref var equipItemData = ref _itemFilter.Get1(itemIndex);
                 ref var entity = ref _itemFilter.GetEntity(itemIndex);
 
-                switch (equipItemData.equipItem.slotType)
-                {
-                    case SlotType.HairArmour:
-                        break;
-                    case SlotType.Armour:
-                        SendArmourEquipEvent(equipItemData.equipItem, equipItemData.slotData);
-                        break;
-                    case SlotType.Boots:
-                        break;
-                    case SlotType.Weapon:
-                        break;
-                    case SlotType.SecondWeapon:
-                        break;
-                }
+                TakeItemToSlot(equipItemData.equipItem, equipItemData.slotData);
+                
+                SendArmourEquipEvent(equipItemData.equipItem);
+                
                 entity.Destroy();
             }
         }
 
-        private void SendArmourEquipEvent(EquipItem equipItem, SlotData slotData)
+        private void SendArmourEquipEvent(EquipItem equipItem)
         {
-            Debug.Log("Slot data = " + slotData);
             var entityAction = _ecsWorld.NewEntity();
-            var armourAction = new ArmourActionEvent()
+        
+            entityAction.Get<ArmourActionEvent>()._equipItem = equipItem;
+        }
+
+        private void TakeItemToSlot(EquipItem equipItem, SlotData slotData)
+        {
+            if (!_inventoryEquip.GetSlotData(equipItem.slotType).isOccupied)
             {
-                _equipItem = equipItem,
-                _slotData = slotData
-            };
-            entityAction.Get<ArmourActionEvent>() = armourAction;
+                var ecsEntity = _ecsWorld.NewEntity();
+                var item = _inventorySettings.GetItemFromSlot(slotData);
+                _inventoryEquip.AddNewItemToEquipSlot(equipItem.slotType, ecsEntity, slotData);
+
+                Debug.Log("Add qeuip item");
+            }
+
+            else if (_inventoryEquip.GetSlotData(equipItem.slotType).isOccupied)
+            {
+                var ecsEntity = _ecsWorld.NewEntity();
+                _inventoryEquip.ChangeItemToEquipSlot(equipItem.slotType, slotData, ecsEntity);
+
+                Debug.Log("Change item");
+            }
+            
         }
     }
 }
