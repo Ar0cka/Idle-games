@@ -19,6 +19,8 @@ namespace DefaultNamespace.Battle.System.BattleSystem.BlockSystems
         private readonly EcsFilter<isBattlePhaseComponent> _phaseStateFilter = null;
 
         private readonly EcsFilter<MonsterBattleComponents> _monsterFilter = null;
+
+        private PlayerData _playerData;
         
         public void Run()
         {
@@ -34,7 +36,6 @@ namespace DefaultNamespace.Battle.System.BattleSystem.BlockSystems
                     
                     foreach (var playerIndex in _playerFilter)
                     {
-                        ref var player = ref _playerFilter.Get1(playerIndex).playerSettings;
                         ref var cooldown = ref _playerFilter.Get2(playerIndex);
                         ref var entity = ref _playerFilter.GetEntity(playerIndex);
 
@@ -44,13 +45,13 @@ namespace DefaultNamespace.Battle.System.BattleSystem.BlockSystems
                         {
                             if (cooldown.Timer <= 0)
                             {
-                                cooldown.Timer = player._attackSpeed;
+                                cooldown.Timer = _playerData.attackSpeed;
 
                                 foreach (var monsterIndex in _monsterFilter)
                                 {
                                     ref var entityMonster = ref _monsterFilter.GetEntity(monsterIndex);
 
-                                    entityMonster.Get<PlayerAttackEvent>().damagePlayer = player._damage;
+                                    entityMonster.Get<PlayerAttackEvent>().damagePlayer = _playerData.damage;
                                 }
                             }
                             else
@@ -60,7 +61,7 @@ namespace DefaultNamespace.Battle.System.BattleSystem.BlockSystems
                         }
                         else
                         {
-                            cooldown.Timer = player._attackSpeed;
+                            cooldown.Timer = _playerData.attackSpeed;
                         }
                     }
                 }

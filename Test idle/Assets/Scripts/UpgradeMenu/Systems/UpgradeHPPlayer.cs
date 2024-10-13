@@ -22,7 +22,7 @@ namespace DefaultNamespace.UpgradeMenu.Systems
                 switch (states.statesType)
                 {
                     case StatesType.Health : 
-                        _playerSettings.UpgradeHitPoint(states.upgradeFloatStats);
+                        _playerSettings.UpgradeHitPoint((int) states.upgradeFloatStats);
                         break;
                     case StatesType.Armour :
                         _playerSettings.UpgradeArmour(states.upgradeFloatStats);

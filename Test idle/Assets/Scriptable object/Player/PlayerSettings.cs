@@ -3,8 +3,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Player", menuName = "PlayerCreate", order = 0)]
 public class PlayerSettings : ScriptableObject
 {
-    [SerializeField] private float hitPoint;
-    public float _hitPoint => hitPoint;
+    [SerializeField] private int hitPoint;
+    public int _hitPoint => hitPoint;
     
     [SerializeField] private float damage;
     public float _damage => damage;
@@ -15,7 +15,7 @@ public class PlayerSettings : ScriptableObject
     [SerializeField] private float attackSpeed;
     public float _attackSpeed => attackSpeed;
 
-    public void UpgradeHitPoint(float buffHp)
+    public void UpgradeHitPoint(int buffHp)
     {
         hitPoint += buffHp;
     }

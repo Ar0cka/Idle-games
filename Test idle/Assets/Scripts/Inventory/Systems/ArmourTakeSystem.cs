@@ -12,8 +12,8 @@ namespace Inventory.Systems
     {
         private EcsWorld _ecsWorld;
         private readonly EcsFilter<ArmourActionEvent> _itemFilter = null;
-        private readonly EcsFilter<PlayerSettingsComponent> _playerFilter = null;
         private readonly EcsFilter<TextMenuComponent> _menuFilter = null;
+        private PlayerData _playerData;
 
         public void Run()
         {
@@ -22,32 +22,11 @@ namespace Inventory.Systems
                 ref var item = ref _itemFilter.Get1(itemIndex);
                 ref var entity = ref _itemFilter.GetEntity(itemIndex);
                 
-                foreach (var playerIndex in _playerFilter)
-                {
-                    ref var player = ref _playerFilter.Get1(playerIndex);
-                    var playerData = player.playerSettings;
-                    
-                    if (item._equipItem is HairItemStats hairArmour)
-                        EquipHairItem(hairArmour, playerData);
-                    else if (item._equipItem is Armour armour)
-                        EquipArmour(armour, playerData);
-                        
-                    
-                    SendUpdateMenuEvent();
-                    entity.Destroy();
-                }
+                _playerData.EquipItem(item._equipItem);
+
+                SendUpdateMenuEvent();
+                entity.Destroy();
             }
-        }
-
-        private void EquipHairItem(HairItemStats hairItemStats, PlayerSettings player)
-        {
-            player.UpgradeArmour(hairItemStats.armour);
-            player.UpgradeHitPoint(hairItemStats.hp); 
-        }
-
-        private void EquipArmour(Armour armour, PlayerSettings player)
-        {
-            player.UpgradeArmour(armour.armour);
         }
 
         private void SendUpdateMenuEvent()

@@ -13,6 +13,7 @@ namespace DefaultNamespace.Battle.System
         private readonly EcsFilter<PlayerSettingsComponent> _playerFilter = null;
         private readonly EcsFilter<HpBarComponent> _barFilter = null;
         private readonly EcsFilter<ButtonBattleComponent> _buttonFilter = null;
+        private PlayerData _playerData;
 
         public void Init()
         {
@@ -32,7 +33,7 @@ namespace DefaultNamespace.Battle.System
             {
                 ref var player = ref _playerFilter.Get1(playerIndex);
 
-                player.currentHP = player.playerSettings._hitPoint;
+                player.currentHP = _playerData.maxHp;
                
                 UpdateUI();
                 

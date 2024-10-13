@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using DefaultNamespace.Components;
 using Inventory.Events;
 using Leopotam.Ecs;
 using Scriptable_object.Items;
@@ -49,7 +50,7 @@ namespace Inventory
             }
         }
 
-        public void ChangeItemToEquipSlot(SlotType slotType, SlotData slotData, EcsEntity _ecsEntity)
+        public void ChangeItemToEquipSlot(SlotType slotType, SlotData slotData, EcsEntity _ecsEntity, PlayerData _playerData)
         {
             foreach (var slot in _slotData)
             {
@@ -60,7 +61,8 @@ namespace Inventory
                     if (item.GetComponentInChildren<ItemSettings>().baseAbstractItem is EquipItem equipItem)
                     {
                         _inventorySettings.ReturnItemFromEquipSlot(slot, _ecsEntity);
-                        AddNewItemToEquipSlot(equipItem.slotType, _ecsEntity, slotData);
+                        _playerData.DeleteItemFromEquip(equipItem);
+                        AddNewItemToEquipSlot(equipItem.slotType, _ecsEntity, slotData); 
                     }
 
                     break;

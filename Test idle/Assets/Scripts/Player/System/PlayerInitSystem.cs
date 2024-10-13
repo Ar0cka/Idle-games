@@ -13,16 +13,17 @@ namespace DefaultNamespace.Player.System
         private EcsFilter<PlayerSettingsComponent> playerFilter = null;
         private EcsFilter<HpBarComponent> _barFilter = null;
         private EcsFilter<TextMenuComponent> _textFilter;
+        private PlayerData _playerData;
 
         public void Init()
         {
             foreach (var i in playerFilter)
             {
-                ref var playerSettingsComponent = ref playerFilter.Get1(i);
-
+                ref var playerSettingsComponent = ref playerFilter.Get1(i); 
+                
                 if (playerSettingsComponent.currentHP == 0)
                 {
-                    playerSettingsComponent.currentHP = playerSettingsComponent.playerSettings._hitPoint;
+                    playerSettingsComponent.currentHP = _playerData.maxHp;
                     SendUpdateMenuUIEvent();
                     UpdatePlayerBar();
                 }

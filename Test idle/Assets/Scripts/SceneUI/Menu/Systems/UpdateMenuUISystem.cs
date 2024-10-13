@@ -9,7 +9,7 @@ namespace DefaultNamespace.SceneUI.Menu.Systems
     public class UpdateMenuUISystem : IEcsRunSystem
     { 
         private readonly EcsFilter<TextMenuComponent, UpdateMenuEvent> _menuFilter = null;
-        private readonly EcsFilter<PlayerSettingsComponent> _playerFilter = null;
+        private PlayerData _playerData;
         
         
         public void Run()
@@ -18,20 +18,15 @@ namespace DefaultNamespace.SceneUI.Menu.Systems
             {
                 ref var textUI = ref _menuFilter.Get1(menuIndex);
                 ref var entity = ref _menuFilter.GetEntity(menuIndex);
-
-                foreach (var playerIndex in _playerFilter)
-                {
-                    ref var playerSettings = ref _playerFilter.Get1(playerIndex).playerSettings;
                     
-                    textUI.hpText.text = $"Max hp = {playerSettings._hitPoint}";
-                    textUI.damageText.text = $"Damage = {playerSettings._damage}";
-                    textUI.attackSpeedText.text = $"Attack speed = {playerSettings._attackSpeed}";
-                    textUI.armorText.text = $"Armour = {playerSettings._armour}";
+                textUI.hpText.text = $"Max hp = {_playerData.maxHp}";
+                textUI.damageText.text = $"Damage = {_playerData.damage}";
+                textUI.attackSpeedText.text = $"Attack speed = {_playerData.attackSpeed}";
+                textUI.armorText.text = $"Armour = {_playerData.armour}";
                     
-                    Debug.Log($"Update menu ui");
+                Debug.Log($"Update menu ui");
                     
-                    entity.Del<UpdateMenuEvent>();
-                }
+                entity.Del<UpdateMenuEvent>();
             }
         }
     }

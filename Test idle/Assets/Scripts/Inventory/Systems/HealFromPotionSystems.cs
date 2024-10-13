@@ -12,9 +12,10 @@ namespace Inventory.Systems
     {
         private EcsWorld _ecsWorld;
         private readonly EcsFilter<HealActionEvent> _healFilter = null;
-        private readonly EcsFilter<PlayerSettingsComponent> _playerFilter;
         private readonly EcsFilter<HpBarComponent> _barFilter;
+        private readonly EcsFilter<PlayerSettingsComponent> _playerFilter = null;
         private InventorySettings _inventorySettings;
+        private PlayerData _playerData;
 
         public void Run()
         {
@@ -27,8 +28,8 @@ namespace Inventory.Systems
                 {
                     ref var player = ref _playerFilter.Get1(playerIndex);
 
-                    float amountNeedHeal = player.playerSettings._hitPoint - player.currentHP;
-                    float healAmount = Math.Min(amountNeedHeal, healData.buffsItemsData.quantityBuff);
+                    int amountNeedHeal = _playerData.maxHp - player.currentHP;
+                    int healAmount = Math.Min(amountNeedHeal, (int)healData.buffsItemsData.quantityBuff);
 
                     Debug.Log($"heal amount = {healAmount}");
                     

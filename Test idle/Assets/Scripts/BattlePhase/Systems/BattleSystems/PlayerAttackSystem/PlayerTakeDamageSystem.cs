@@ -1,4 +1,5 @@
 ﻿
+using System;
 using DefaultNamespace.Battle.Components.BattleComponents;
 using DefaultNamespace.Battle.Components.Events;
 using DefaultNamespace.Battle.Components.Events.AttackEvents;
@@ -14,6 +15,7 @@ namespace BattlePhase.Systems.BattleSystems.PlayerAttackSystem
     {
         private readonly EcsFilter<PlayerSettingsComponent, MonsterAttackEvent> _player = null;
         private readonly EcsFilter<HpBarComponent> _hpBarFilter = null;
+        private PlayerData _playerData;
 
         public void Run()
         {
@@ -27,10 +29,10 @@ namespace BattlePhase.Systems.BattleSystems.PlayerAttackSystem
                 
                 if (damageMonster > 0)
                 {
-                    var effectiveArmour = player.playerSettings._armour / (1 + player.playerSettings._armour * 0.05f);
+                    var effectiveArmour = _playerData.armour / (1 + _playerData.armour * 0.05f);
                     var damage = Mathf.Max(0, damageMonster - effectiveArmour);
                     
-                    player.currentHP -= damage;
+                    player.currentHP -= (int)Math.Round(damage);
                     
                     if (barEntity != default)
                     barEntity.Get<UpdatePlayerUIEvent>();

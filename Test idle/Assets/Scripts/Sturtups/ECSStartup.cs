@@ -7,6 +7,7 @@ using DefaultNamespace.Battle.Components.Events.BlockAttackEvents;
 using DefaultNamespace.Battle.System;
 using DefaultNamespace.Battle.System.BattleSystem.BlockSystems;
 using DefaultNamespace.Battle.System.BattleSystems.MonstersAttackSystem;
+using DefaultNamespace.Components;
 using DefaultNamespace.ControlPhase.Components.Events;
 using DefaultNamespace.ControlPhase.System.ControlEnemyHP;
 using DefaultNamespace.MonsterSpawn.Events;
@@ -28,10 +29,14 @@ namespace DefaultNamespace
     {
         [SerializeField] private InventorySettings inventorySettings;
         [SerializeField] private InventoryEquip _inventoryEquip;
+        [SerializeField] private PlayerSettings _playerSettings;
+        private PlayerData _playerData;
         
         private EcsWorld world;
         private EcsSystems systems;
 
+        
+        
         private void Start()
         {
             world = new EcsWorld();
@@ -70,6 +75,8 @@ namespace DefaultNamespace
 
         private void AddBattlePhaseInjections()
         {
+            _playerData = new PlayerData(_playerSettings);
+            systems.Inject(_playerData);
             systems.Inject(inventorySettings);
             systems.Inject(_inventoryEquip);
         }

@@ -1,4 +1,5 @@
-﻿using Inventory.Events;
+﻿using DefaultNamespace.Components;
+using Inventory.Events;
 using Leopotam.Ecs;
 using Scriptable_object.Items;
 using UnityEngine;
@@ -11,6 +12,7 @@ namespace Inventory.Systems
         private readonly EcsFilter<TakeTypeEquipItemEvent> _itemFilter;
         private InventorySettings _inventorySettings;
         private InventoryEquip _inventoryEquip;
+        private PlayerData _playerData;
 
         public void Run()
         {
@@ -48,7 +50,7 @@ namespace Inventory.Systems
             else if (_inventoryEquip.GetSlotData(equipItem.slotType).isOccupied)
             {
                 var ecsEntity = _ecsWorld.NewEntity();
-                _inventoryEquip.ChangeItemToEquipSlot(equipItem.slotType, slotData, ecsEntity);
+                _inventoryEquip.ChangeItemToEquipSlot(equipItem.slotType, slotData, ecsEntity, _playerData);
 
                 Debug.Log("Change item");
             }

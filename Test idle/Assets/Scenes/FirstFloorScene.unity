@@ -888,7 +888,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ac760ee89fc4f9cb3d662e5e8a46fa6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _itemForDrop: {fileID: 6779349793635436437, guid: 58299afd5c3ee0e4d9b4d10922d5d282, type: 3}
+  _itemForDrop: {fileID: 1227669454807947895, guid: 1bd99bef838b4ca40a82ad1c3f81a247, type: 3}
   _inventorySettings: {fileID: 1374232970}
 --- !u!114 &318875629
 MonoBehaviour:
@@ -5788,6 +5788,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventorySettings: {fileID: 1374232970}
   _inventoryEquip: {fileID: 1374232971}
+  _playerSettings: {fileID: 11400000, guid: efa1a680de586d74286b340fc0847d4b, type: 2}
 --- !u!4 &1670526128
 Transform:
   m_ObjectHideFlags: 0
