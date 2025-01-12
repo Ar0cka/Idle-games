@@ -13,9 +13,10 @@ namespace Inventory
     public class InventorySettings : MonoBehaviour
     {
         [SerializeField] private List<GameObject> slotFromScene;
+        
         public List<GameObject> _slotFromScene => slotFromScene;
         private List<SlotData> _slots = new List<SlotData>();
-
+        
         private void Awake()
         {
             foreach (var slot in slotFromScene)
@@ -71,7 +72,7 @@ namespace Inventory
             }
         }
 
-        public void ReturnItemFromEquipSlot(EquipSlotData slotData, EcsEntity _entity)
+        public void ReturnItemFromEquipSlot(EquipSlotData slotData                  )
         {
             for (int i = 0; i < _slots.Count; i++)
             {
@@ -83,7 +84,6 @@ namespace Inventory
                     slotData.slot.GetComponentInChildren<ItemSettings>().transform.SetParent(_slots[i]._slot.transform, false);
                     _slots[i].NonCollectObjectAddToInventory();
                     slotData.ItemIsOccupied(false);
-                    _entity.Get<DeleteItemFromEquipSlotEvent>();
                     break;
                 }
             }
@@ -98,11 +98,8 @@ namespace Inventory
             }
         }
         
-        private void CreateItemToCollectSlot(GameObject itemForSlot, Transform transforForSpawn, CollectedItems itemData)
-        {
-             Instantiate(itemForSlot, transforForSpawn);
-        }
-
+        private void CreateItemToCollectSlot(GameObject itemForSlot, Transform transforForSpawn, CollectedItems itemData) => Instantiate(itemForSlot, transforForSpawn);
+  
         public GameObject GetItemFromSlot(SlotData _slotData)
         { 
             GameObject item = _slotData._slot.GetComponentInChildren<ItemSettings>().gameObject;
@@ -135,6 +132,13 @@ namespace Inventory
             {
                 Debug.LogError("SlotData = null");
             }
+        }
+
+        public void DeleteItemFromSlot(SlotData slotData)
+        {
+            GameObject item = slotData._slot.GetComponentInChildren<ItemSettings>().gameObject;
+            Destroy(item);
+            slotData.DeleteItemFromSlot();
         }
     }
 }

@@ -60,7 +60,7 @@ namespace Inventory
 
                     if (item.GetComponentInChildren<ItemSettings>().baseAbstractItem is EquipItem equipItem)
                     {
-                        _inventorySettings.ReturnItemFromEquipSlot(slot, _ecsEntity);
+                        _inventorySettings.ReturnItemFromEquipSlot(slot);
                         _playerData.DeleteItemFromEquip(equipItem);
                         AddNewItemToEquipSlot(equipItem.slotType, _ecsEntity, slotData); 
                     }
@@ -91,6 +91,11 @@ namespace Inventory
         public EquipSlotData GetSlotData(SlotType slotType)
         {
             return _slotData.FirstOrDefault(slot => slot.slotType == slotType);
+        }
+
+        public List<EquipSlotData> ReturnSlots()
+        {
+            return _slotData;
         }
     }
 }

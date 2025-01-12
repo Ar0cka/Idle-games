@@ -26,25 +26,10 @@ namespace Inventory.Systems
                 if (slotData.countItemToSlot == 0) 
                 {
                     slotData.DeleteItemFromSlot(); 
-                    DeleteListenerFromUsedItem();
                     _inventorySettings.UseItemFromSlot(slotData);
                 }
                 
                 entityItem.Destroy();
-            }
-        }
-
-        private void DeleteListenerFromUsedItem()
-        {
-            foreach (var slot in _inventorySettings.GetSlotData())
-            {
-                if (!slot.IsOccupied && slot.isHaveListener)
-                {
-                    Button itemWithButtonEvent = slot._slot.GetComponentInChildren<Button>();
-                    Debug.Log($"Slot name {slot._slot.name} and button = {itemWithButtonEvent.name}");
-                    itemWithButtonEvent.onClick.RemoveAllListeners();
-                    slot.ChangeListener(false);
-                }
             }
         }
     }

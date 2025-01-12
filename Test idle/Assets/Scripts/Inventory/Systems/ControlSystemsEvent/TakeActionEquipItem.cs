@@ -41,7 +41,6 @@ namespace Inventory.Systems
             if (!_inventoryEquip.GetSlotData(equipItem.slotType).isOccupied)
             {
                 var ecsEntity = _ecsWorld.NewEntity();
-                var item = _inventorySettings.GetItemFromSlot(slotData);
                 _inventoryEquip.AddNewItemToEquipSlot(equipItem.slotType, ecsEntity, slotData);
 
                 Debug.Log("Add qeuip item");

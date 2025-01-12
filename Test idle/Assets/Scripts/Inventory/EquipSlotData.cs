@@ -6,6 +6,9 @@ namespace Inventory
     public class EquipSlotData
     {
         public bool isOccupied { get; private set; }
+
+        public bool isHaveListener { get; private set; }
+
         public SlotType slotType { get; private set; }
         public GameObject slot { get; private set; }
 
@@ -16,9 +19,7 @@ namespace Inventory
             isOccupied = false;
         }
 
-        public void ItemIsOccupied(bool occupied)
-        {
-            isOccupied = occupied;
-        }
+        public void ItemIsOccupied(bool occupied) => isOccupied = occupied;
+        public void IsHaveListener(bool listener) => isHaveListener = listener;
     }
 }

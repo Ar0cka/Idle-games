@@ -15,6 +15,7 @@ using DefaultNamespace.Player.System;
 using DefaultNamespace.SceneUI.Menu.Systems;
 using Inventory;
 using Inventory.Systems;
+using Inventory.Systems.ControlItemEquipSlots;
 using Leopotam.Ecs;
 using MonsterSpawn.Systems;
 using MonsterSpawn.Systems.CheckStateSystem;
@@ -22,6 +23,7 @@ using MonsterSpawn.Systems.DestroyMonster;
 using MonsterSpawn.Systems.RespawnSystems;
 using UnityEngine;
 using Voody.UniLeo;
+using RemoveItemFromEquipSlot = Inventory.Systems.ControlItemEquipSlots.RemoveItemFromEquipSlot;
 
 namespace DefaultNamespace
 {
@@ -150,7 +152,6 @@ namespace DefaultNamespace
 
         private void SerializeMenu()
         {
-           
             systems.Add(new OpenMenuOnBattleScene());
             systems.Add(new CloseMenuSystem());
         }

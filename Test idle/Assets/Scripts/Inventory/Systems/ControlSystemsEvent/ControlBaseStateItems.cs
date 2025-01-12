@@ -18,23 +18,8 @@ namespace Inventory.Systems
                 ref var slotData = ref _itemFilter.Get1(itemIndex);
                 ref var entity = ref _itemFilter.GetEntity(itemIndex);
                 
-                DeleteListenerFromItem(slotData.slotData, slotData._item);
                 slotData.slotData.DeleteItemFromSlot();
                 entity.Destroy();
-            }
-        }
-
-        private void DeleteListenerFromItem(SlotData slotData, GameObject item)
-        {
-            try
-            {
-                var itemButton = item.GetComponent<Button>();
-                itemButton.onClick.RemoveAllListeners();
-                slotData.ChangeListener(false);
-            }
-            catch (Exception e)
-            {
-                Debug.Log($"Erorr {e}");
             }
         }
     }
